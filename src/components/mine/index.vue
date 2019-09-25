@@ -23,13 +23,15 @@
     width: 100%;
     text-align: center;
     .avatar img{
-      width: 80px;
-      height: 80px;
+      width: 40vw;
+      height: 40vw;
+      max-width: 140px;
+      max-height: 140px;
       border-radius: 50%;
     }
     .nickName {
       color: #000;
-      font-size: 14px;
+      font-size: 1.2em;
       margin: 20px 0;
     }
   }

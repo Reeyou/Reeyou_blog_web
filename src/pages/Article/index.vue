@@ -1,27 +1,41 @@
 <template>
-  <div>
-    <Mine />
-    <Tab />
-    <ArticleList />
-    <Footer />
+  <div class='container'>
+    <ArticleList class='articleList'/>
+    <Slider class='slider' />
+    <!-- <Comment /> -->
   </div>
 </template>
 
 <script>
-import Mine from '../../components/mine'
-import Tab from '../../components/tab'
 import ArticleList from '../../components/articleList'
-import Footer from '../../components/footer'
+import Slider from '../../components/slider/sliderHome'
+import Comment from '../../components/comment'
 export default {
   components: {
-    Mine,
-    Tab,
     ArticleList,
-    Footer
+    Slider,
+    Comment
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.container {
+  max-width: 100%;
+  margin-top: 80px;
+  display: flex;
+  .articleList {
+    flex: 1;
+  }
+  .slider {
+    flex: 0 0 25%;
+  }
+}
+@media screen and (max-width: 800px){
+  .container {
+    .slider {
+      display: none;
+    }
+  }
+}
 </style>

@@ -1,16 +1,23 @@
 <template>
   <div class='tab'>
     <ul>
-      <li>简历</li>
-      <li>点滴</li>
-      <li>留言</li>
+      <router-link
+        tag='li'
+        :to="{name: 'article'}"
+        v-for='(item,index) in tabList'
+        :key='index'
+      >{{item}}</router-link>
     </ul>
   </div>
 </template>
 
 <script>
   export default {
-    
+    data() {
+      return {
+        tabList: ['简历','点滴','留言']
+      }
+    }
   }
 </script>
 
@@ -24,8 +31,15 @@
       > li {
         display: inline-block;
         margin-right: 20px;
+        font-size: 1.2em;
+        color: #948c76;
         &:last-child {
           margin-right: 0;
+        }
+        &:hover {
+          cursor: pointer;
+          color: #1890ff;
+          text-decoration: underline;
         }
       }
     }

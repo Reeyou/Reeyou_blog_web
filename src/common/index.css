@@ -1,0 +1,14 @@
+body {
+  /* font-size: 0.14rem;
+  margin: 0.5rem auto 0;
+  padding: 0; */
+  color:#787978;
+  font-family: "Microsoft Yahei";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* max-width: 800px;
+  width: 100%;
+  height: auto;
+  position: relative; */
+  background: url('./bg.jpg') repeat;
+}
