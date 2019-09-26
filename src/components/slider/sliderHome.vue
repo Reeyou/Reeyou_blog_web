@@ -1,8 +1,12 @@
 <template>
   <div class="slider-container">
-    <section class="img-shadow">
+    <section class="cover shadow">
       <div class="col-12">
         <a class="cover1" :style="cover1" href></a>
+        <div class="hover"></div>
+        <div class='hover-title'>
+          <span>Hit me</span>
+        </div>
       </div>
       <div class="row">
         <div class="col-6">
@@ -17,7 +21,7 @@
         </div>
       </div>
     </section>
-    <section class="recommend">
+    <section class="recommend shadow">
       <dl>
         <dt>最近文章</dt>
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>
@@ -29,7 +33,7 @@
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>
       </dl>
     </section>
-    <section class="tagList">
+    <section class="tagList shadow">
       <dl>
         <dt>文章标签</dt>
         <dd><a href="">html</a></dd>

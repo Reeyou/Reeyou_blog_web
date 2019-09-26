@@ -2,29 +2,26 @@
   <div class="article">
     <div class="dots"></div>
     <div class="date-container">
-      <p class='trig'></p>
-      <router-link
-        tag='span'
-        class='date'
-        to='./detail'
-      >2019.9.9</router-link>
+      <p class="trig"></p>
+      <router-link tag="span" class="date" :to="{name: 'detail', params: {id: articleId}}">2019.9.9</router-link>
     </div>
     <div class="container">
       <div class="line"></div>
       <div class="content">
         <div class="title">
-          <router-link
-            to="./detail"
-          >深度优先遍历</router-link>
+          <router-link :to="{name: 'detail', params: {id: articleId}}">{{article.title}}</router-link>
         </div>
-        <div class="descript">深度优先遍历 算法</div>
+        <div class="descript">{{article.desc}}</div>
         <div class="tagList">
-          <a>#html</a>
-          <a>#html</a>
+          <!-- <a
+            v-for="(item,index) in article.tag"
+            :key='index'
+          >#{{item}}</a>-->
+          <a href>#{{article.tag}}</a>
         </div>
       </div>
-      <div class="cover-img" v-if='imgState'>
-        <img src="../../../assets/reeyou.jpg" alt />
+      <div class="cover-img">
+        <img :src="article.poster" alt />
       </div>
     </div>
   </div>
@@ -32,18 +29,21 @@
 
 <script>
 export default {
+  props: ["article"],
   data() {
     return {
-      imgState: true
-    }
-  }
+      articleId: this.article.id
+    };
+  },
+  watch: {},
+  created() {}
 };
 </script>
 
 <style lang="scss" scoped>
-$DeepColor: #948C76;
+$DeepColor: #948c76;
 $hoverColor: #e7d9ba;
-$BrightColor: #F7F3EE;
+$BrightColor: #f7f3ee;
 $dotColor: #e2e0dc;
 $titleColor: #444;
 
@@ -51,7 +51,7 @@ $titleColor: #444;
   width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
-  padding-left: .6em;
+  padding-left: 0.6em;
   position: relative;
   &:last-child {
     margin-bottom: 0;
@@ -62,21 +62,21 @@ $titleColor: #444;
     border: 2px solid $dotColor;
     border-radius: 50%;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0.3rem;
+    left: -40px;
     z-index: 10;
     background: #fff;
   }
   .date-container {
     display: block;
     position: absolute;
-    top: -8px;
+    top: 0.18rem;
     font-size: 12px;
-    margin-left: 3em;
+    margin-left: 0.5em;
     transition: 400ms;
-    z-index: 10; 
+    z-index: 10;
     &:hover {
-      margin-left: 2em;
+      margin-left: 0.1em;
       cursor: pointer;
       .trig {
         border-color: $hoverColor transparent transparent transparent;
@@ -85,66 +85,71 @@ $titleColor: #444;
         background: $hoverColor;
       }
     }
+    .date {
+      display: inline-block;
+      padding: 0 0.5em;
+      height: 2.4em;
+      line-height: 2.4em;
+      vertical-align: top;
+      background: $BrightColor;
+      color: $DeepColor;
+    }
     .trig {
       display: inline-block;
       width: 0;
       height: 0;
       position: absolute;
-      top: -1px;
-      left: -40px;
-      border-width: 21px;
+      top: 0;
+      left: -2.3em;
+      border-width: 1.2em;
       border-style: dashed;
       border-color: $BrightColor transparent transparent transparent;
-      transform: rotate(90deg)
-    }
-    .date {
-      display: inline-block;
-      padding: 0 1em;
-      height: 40px;
-      font-size: .8em;
-      vertical-align: top;
-      line-height: 40px;
-      background: $BrightColor;
-      color: $DeepColor;
+      transform: rotate(90deg);
     }
   }
   .container {
     width: 100%;
     position: relative;
-    overflow: hidden;
-    padding: 20px 0 40px 0;
+    padding: 40px 0 60px 0;
+    display: flex;
     .line {
       width: 2px;
       height: 100%;
       background: $BrightColor;
       position: absolute;
+      left: -40px;
       z-index: 0;
     }
     .content {
-      padding: 0 1em 2em 2em;
+      padding: 0 1em 2em 0em;
       overflow: hidden;
-      float: left;
+      flex: 1;
       .title {
         margin: .6rem 0 .2rem 0;
-        font-size: 14px;
+        font-size: 1.2em;
         line-height: 18px;
         a {
           color: $titleColor;
-        }
-        &:hover {
-          text-decoration: underline;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
       .descript {
-        margin-top: 20px;
-        font-size: 14px;
+        font-size: 1em;
+        line-height: 1.6em;
+        text-align: justify;
       }
       .tagList {
         position: absolute;
-        bottom: 40px;
+        bottom: 58px;
         margin: 10px 0;
         a {
           color: $DeepColor;
+          padding: 6px 20px;
+          border-radius: 8px;
+          background: $BrightColor;
+          // text-decoration: underline;
           &:hover {
             cursor: pointer;
             text-decoration: underline;
@@ -156,7 +161,8 @@ $titleColor: #444;
       }
     }
     .cover-img {
-      float: right;
+      flex: 0 0 200px;
+      margin-top: .45rem;
       img {
         width: 200px;
         height: 190px;

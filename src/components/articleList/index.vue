@@ -1,10 +1,13 @@
 <template>
   <div class='article-list'>
-    <Article />
-    <Article />
-    <Article />
-    <Article />
-    <Article />
+    <div class="box">
+      <Article
+      class='article'
+      v-for='(item,index) in articleList'
+      :key='index'
+      :article='item'
+    />
+    </div>
     <div class="page">
       <Pagination />
     </div>
@@ -15,6 +18,7 @@
 import Article from './article'
 import Pagination from '../pagination'
   export default {
+    props: ['articleList'],
     components: {
       Article,
       Pagination
@@ -23,15 +27,24 @@ import Pagination from '../pagination'
 </script>
 
 <style lang="scss" scoped>
+$BrightColor: #f7f3ee;
   .article-list {
-    max-width: 1000px;
     box-sizing: border-box;
-    padding:0 15px;
-    overflow: hidden;
+    padding: 0 20px;
+    .box {
+      padding: 0 40px;
+      .article {
+      border-bottom: 1px solid $BrightColor;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+    }
     .page {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 60px;
       padding: 0 10px;
+      box-sizing: border-box;
     }
   }
 </style>

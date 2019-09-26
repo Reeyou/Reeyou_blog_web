@@ -5,7 +5,13 @@ import store from './store'
 import App from './App'
 import router from './router'
 import './common/index.css'
+import './common/font.css'
 import 'lib-flexible'
+// highlight.js代码高亮指令
+import Highlight from './utils/highlight';
+ 
+Vue.use(Highlight);
+
 
 Vue.config.productionTip = false
 

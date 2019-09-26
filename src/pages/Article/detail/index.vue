@@ -1,40 +1,56 @@
 <template>
-  <div class="wrapper">
-    <article class="articleDetail">
-      <section class="title">nodejs 使用 nodemailer 发送邮件到指定邮箱</section>
-      <section class="content">
-        做这个功能的目的，是为了通知给我留言的同学。当TA的留言被回复后会即时收到通知邮件
-        是为了通知给我留言的同学。当TA的留言被回复后会即时收到通知邮件是为了通知给我留言的同学。当TA的留言被回复后会即时收到通知邮件
+  <div class="detail">
+    <article class="detail-container">
+      <section class="title">{{article.title}}</section>
+      <section class="content" v-highlightB v-html='article.content'>
+        <h2>解放军解放军解放军解放军解放军解放军解放军解放军解放军解放军解放军解放军解放军解放军</h2>
       </section>
       <section class="foot">
         <div class="date">2019.09.09</div>
       </section>
     </article>
-    <article>
-      <section class="slider">slider</section>
+    <article class="slider">
+      <SliderDetail />
     </article>
   </div>
 </template>
 
 <script>
-import Mine from "../../../components/mine";
-import Tab from "../../../components/tab";
+import SliderDetail from "../../../components/slider/sliderDetail";
+import { getArticleDetail } from '@/service/article'
 export default {
+  data() {
+    return {
+      article: {}
+    }
+  },
+  created() {
+    this.getData()
+    console.log(this.$route)
+  },
+  methods: {
+    getData() {
+      getArticleDetail({id: this.$route.params.id}).then(res => [
+        this.article = res.data
+      ])
+    }
+  },
   components: {
-    Mine,
-    Tab
+    SliderDetail
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  width: 100%;
-  overflow: hidden;
-  .articleDetail {
-    max-width: 800px;
-    float: left;
+.detail {
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 15px;
+  display: flex;
+  .detail-container {
+    flex: 1;
     padding: 28px;
+    box-sizing: border-box;
     text-align: center;
     .title {
       margin: 10px 0 20px 0;
@@ -43,10 +59,39 @@ export default {
       color: #111;
     }
     .content {
-      font-size: 1.2em;
+      margin: 0;
+      font-size: 1em;
       text-align: justify;
-      line-height: 1.3em;
-      color: #787978;
+      line-height: 1.6em;
+      >>> h2 {
+        font-size: 20px;
+      }
+      & >>> *{
+        margin-bottom: 0.7em;
+      }
+      & >>> code, & >>> pre div {
+        margin-bottom: 0;
+      }
+      >>> strong {
+        color: rgb(178, 107, 0);
+        font-weight: bold;
+      }
+      >>> pre{
+        display: block;
+        // max-width: 800px;
+        flex: 1;
+        margin: 0 0 16px;
+        font-size: 1em;
+        line-height: 1.42857143;
+        color: #333;
+        word-break: break-all;
+        word-wrap: break-word;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        line-height: 1.5em;
+        overflow: auto;
+      }
     }
     .foot {
       margin: 10px 0;
@@ -60,10 +105,21 @@ export default {
     }
   }
   .slider {
-    float: right;
-    margin: 40px 0;
-    font-size: 1.5em;
-    // background: #ddd;
+    flex: 0 0 25%;
+    margin-top: 80px;
+    // margin-right: 40px;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 800px) {
+  .detail {
+    .detail-container {
+      width: 100%;
+    }
+    .slider {
+      display: none;
+    }
   }
 }
 </style>

@@ -3,10 +3,10 @@
     <ul>
       <router-link
         tag='li'
-        :to="{name: 'article'}"
         v-for='(item,index) in tabList'
+        :to="{name: item.path}"
         :key='index'
-      >{{item}}</router-link>
+      >{{item.label}}</router-link>
     </ul>
   </div>
 </template>
@@ -15,7 +15,20 @@
   export default {
     data() {
       return {
-        tabList: ['简历','点滴','留言']
+        tabList: [
+          {
+            label: '简历',
+            path: 'resume'
+          },
+          {
+            label: '点滴',
+            path: 'article'
+          },
+          {
+            label: '留言',
+            path: 'message'
+          },
+        ]
       }
     }
   }
@@ -25,12 +38,11 @@
   .tab {
     width: 100%;
     text-align: center;
-    margin: 20px 0;
     ul {
       padding: 0;
       > li {
         display: inline-block;
-        margin-right: 20px;
+        margin-right: 1.2em;
         font-size: 1.2em;
         color: #948c76;
         &:last-child {

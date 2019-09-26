@@ -6,21 +6,31 @@
   url('//at.alicdn.com/t/font_1046543_8fw847jzm1c.ttf?t=1552903970322') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
   url('//at.alicdn.com/t/font_1046543_8fw847jzm1c.svg?t=1552903970322#iconfont') format('svg'); /* iOS 4.1- */
 }
-body {
-  color:#787978;
-}
-code {
-  /* font-size: 0.14rem;
-  margin: 0.5rem auto 0;
-  padding: 0; */
+
+.iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* max-width: 800px;
-  width: 100%;
-  height: auto;
-  position: relative; */
-  background: url('./bg.jpg') repeat;
+}
+
+.icon-moon:before {
+  content: "\e6d4";
+}
+
+.icon-moon1:before {
+  content: "\e662";
+}
+
+.icon-jinggao:before {
+  content: "\e601";
+}
+
+.icon-emojibiaoqing-:before {
+  content: "\e610";
+}
+
+.icon-jinggao1:before {
+  content: "\e620";
 }

@@ -1,6 +1,9 @@
 <template>
   <div class='container'>
-    <ArticleList class='articleList'/>
+    <ArticleList
+      class='articleList'
+      :articleList='ArticleList'
+    />
     <Slider class='slider' />
     <!-- <Comment /> -->
   </div>
@@ -10,7 +13,23 @@
 import ArticleList from '../../components/articleList'
 import Slider from '../../components/slider/sliderHome'
 import Comment from '../../components/comment'
+import { getArticleList } from '@/service/article'
 export default {
+  data() {
+    return {
+      ArticleList: []
+    }
+  },
+  created() {
+    this.getData()
+  },
+  methods: {
+    getData() {
+      getArticleList().then(res => {
+        this.ArticleList = res.data
+      })
+    },
+  },
   components: {
     ArticleList,
     Slider,
@@ -28,6 +47,7 @@ export default {
     flex: 1;
   }
   .slider {
+    margin-top: 0.18rem;
     flex: 0 0 25%;
   }
 }
