@@ -32,7 +32,7 @@ export default {
   props: ["article"],
   data() {
     return {
-      articleId: this.article.id
+      articleId: this.article._id
     };
   },
   watch: {},

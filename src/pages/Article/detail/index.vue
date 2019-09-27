@@ -3,10 +3,12 @@
     <article class="detail-container">
       <section class="title">{{article.title}}</section>
       <section class="content" v-highlightB v-html='article.content'>
-        <h2>解放军解放军解放军解放军解放军解放军解放军解放军解放军解放军解放军解放军解放军解放军</h2>
       </section>
       <section class="foot">
         <div class="date">2019.09.09</div>
+      </section>
+      <section class='comment'>
+        <Comment />
       </section>
     </article>
     <article class="slider">
@@ -17,16 +19,18 @@
 
 <script>
 import SliderDetail from "../../../components/slider/sliderDetail";
-import { getArticleDetail } from '@/service/article'
+import Comment from "../../../components/comment";
+import { getArticleDetail, getComment } from '@/service/article'
 export default {
   data() {
     return {
-      article: {}
+      article: {},
+      articleId: ''
     }
   },
   created() {
     this.getData()
-    console.log(this.$route)
+    // console.log(this.commentData)
   },
   methods: {
     getData() {
@@ -36,7 +40,8 @@ export default {
     }
   },
   components: {
-    SliderDetail
+    SliderDetail,
+    Comment
   }
 };
 </script>
@@ -81,7 +86,7 @@ export default {
         // max-width: 800px;
         flex: 1;
         margin: 0 0 16px;
-        font-size: 1em;
+        font-size: 1.1em;
         line-height: 1.42857143;
         color: #333;
         word-break: break-all;
@@ -102,6 +107,10 @@ export default {
         float: right;
         font-size: 1em;
       }
+    }
+    .comment {
+      // height: 200px;
+      margin-top: 40px;
     }
   }
   .slider {

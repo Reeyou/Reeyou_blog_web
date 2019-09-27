@@ -1,21 +1,30 @@
 import vue from 'vue'
 import Vuex from 'vuex'
+import { COUNT,USER } from './mutation_types'
 
 vue.use(Vuex)
 
 const state = {
-  count: 0
+  count: 1,
+  user: localStorage["userinfo"] ? JSON.parse(localStorage["userinfo"]): {},
 }
 
  const mutations = {
-  showStatus(state) {
-    state.count ++
+  [COUNT](state, data) {
+    state.count += data.count
+  },
+  [USER](state, data) {
+    state.user = data
   }
+  
 }
 
  const actions = {
-  changeStatus(context) {
-    context.commit("showStatus")
+  changeCount: (context) => {
+    context.commit("COUNT",{count: 10})
+  },
+  getUserInfo(context) {
+    context.commit('USER',{A:1})
   }
 }
 

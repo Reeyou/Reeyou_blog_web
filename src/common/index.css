@@ -8,6 +8,7 @@
 }
 body {
   color:#787978;
+  background: url('./bg.jpg') repeat;
 }
 code {
   /* font-size: 0.14rem;
@@ -22,5 +23,5 @@ code {
   width: 100%;
   height: auto;
   position: relative; */
-  background: url('./bg.jpg') repeat;
+  
 }

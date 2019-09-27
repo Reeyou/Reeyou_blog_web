@@ -15,3 +15,14 @@ export async function getArticleList() {
 export async function getArticleDetail(params) {
   return request(`/api/getArticleDetail/${formatParam(params)}`)
 }
+export async function getComment(params) {
+  return request(`/api/getComment/${formatParam(params)}`)
+}
+export async function addComment(params) {
+  return request('/api/addComment', {
+    method: 'POST',
+    body: {
+      ...params
+    }
+  })
+}

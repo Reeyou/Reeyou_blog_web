@@ -4,10 +4,12 @@ import Index from '@/pages/Index'
 import Main from '@/pages/main.vue'
 import App from '@/pages/App'
 import Message from '@/pages/Message'
+import Redirect from '@/pages/Login/redirect'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history', 
   routes: [
     // {
     //   path: '/',
@@ -23,12 +25,8 @@ export default new Router({
         {path: 'detail/:id', name: 'detail', component: () => import('@/pages/Article/detail')},
         {path: 'resume', name: 'resume', component: () => import('@/pages/Resume')},
         {path: 'message', name: 'message', component: () => import('@/pages/Message')},
+        {path: 'oauth/redirect', name: 'redirect', component: () => import('@/pages/Login/redirect')},
       ]
-    },
-    {
-      path: '/app',
-      name: 'app',
-      component: App
     },
     {
       path: '/message',
