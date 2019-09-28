@@ -9,7 +9,7 @@
     />
     </div>
     <div class="page">
-      <Pagination />
+      <!-- <Pagination /> -->
     </div>
   </div>
 </template>

@@ -27,6 +27,8 @@ export default {
   },
   created() {
     this.getData()
+    console.log(11)
+    console.log(this.tagList.length)
   },
   methods: {
     getData() {

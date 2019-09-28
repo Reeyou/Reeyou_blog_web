@@ -3,15 +3,15 @@
     <section class="comment-container">
       <div class="input-container">
         <div class="login">
-          <p class="tips" v-if="state">欢迎评论 {{user.name}}</p>
-          <p class="tips" v-else>评论请先登录</p>
+          <p class="tips" v-if="state">欢迎{{type}} {{user.name}}</p>
+          <p class="tips" v-else>{{type}}请先登录</p>
           <p class="login-btn" v-if="state" @click="handleLogout">退出</p>
           <p class="login-btn" v-else @click="handleLogin">登录</p>
         </div>
         <textarea
           ref="textarea"
           v-model="inputValue"
-          placeholder="请输入评论,文明理性..."
+          placeholder="请输入内容..."
           class="input"
           name
           id
@@ -20,14 +20,14 @@
         ></textarea>
       </div>
       <div class="control">
-        <p ref="errMsg" class="errMsg" v-if="errState">请输入评价内容</p>
+        <p ref="errMsg" class="errMsg" v-if="errState">请输入{{type}}内容</p>
         <button @click="handleComment" class="btn" v-if="btnState">发布</button>
         <button @click="handleReply" class="btn" v-if="!btnState">回复</button>
       </div>
     </section>
     <section class="comment-list">
       <ul ref="commentList">
-        <li v-for="(item,index) in commentData" :key="index">
+        <li v-for="(item,index) in Data" :key="index">
           <div class="avatar">{{item.name.substr(0,1)}}</div>
           <div class="con">
             <p class="info">
@@ -71,30 +71,28 @@
 
 <script>
 import { mapState } from "vuex";
-import {
-  addComment,
-  getComment,
-  deleteComment,
-  replyComment
-} from "@/service/article";
 export default {
+  props: [
+    'type',
+    'Data',
+    // 'handleComment',
+    // 'handleBack',
+    // 'handleReply',
+    'handleDel'
+  ],
   data() {
     return {
       state: false,
-      firstName: "",
       inputValue: "",
       comment: "",
       errState: false,
       btnState: true,
-      commentData: [],
       replyName: "",
       replyId: ""
     };
   },
   created() {
-    this.getCommentList();
     this.state = JSON.stringify(this.user) === "{}" ? false : true;
-    this.firstName = this.user.name.substr(0, 1);
   },
   computed: mapState({
     user: state => state.user
@@ -108,25 +106,10 @@ export default {
       localStorage.removeItem("userinfo");
     },
     handleComment() {
-      this.content = this.inputValue;
-      this.errState = this.content ? false : true;
-      console.log(this.errState)
-      const params = {
-        articleId: this.$route.params.id,
-        name: this.user.name,
-        content: this.content
-      };
-      addComment(params).then(res => {
-        if (res.code == 200) {
-          // this.data = res.data
-        }
-      });
+      this.$emit('commentTo',{content: this.inputValue})
+      this.errState = this.inputValue ? false : true;
     },
-    getCommentList() {
-      getComment({ articleId: this.$route.params.id }).then(res => {
-        this.commentData = res.data;
-      });
-    },
+    
     handleBack(name, id) {
       this.btnState = false;
       this.inputValue = `@${name}：`;
@@ -134,21 +117,8 @@ export default {
       this.replyId = id;
     },
     handleReply() {
-      this.content = this.inputValue;
-      this.errState = this.content ? false : true;
-      const params = {
-        fromName: this.user.name,
-        toUid: this.replyId,
-        articleId: this.$route.params.id,
-        content: this.inputValue
-      };
-      console.log(params);
-      replyComment(params).then(res => {
-        
-      });
-    },
-    handleDel(id) {
-      deleteComment({ commentId: id }).then(res => {});
+      this.$emit('replyTo',{content: this.inputValue, replyId: this.replyId})
+      this.errState = this.inputValue ? false : true;
     }
   }
 };

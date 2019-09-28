@@ -8,7 +8,13 @@
         <div class="date">2019.09.09</div>
       </section>
       <section class='comment'>
-        <Comment />
+        <Comment
+          type="评论"
+          :Data='commentData'
+          :handleDel='handleDel'
+          @commentTo='handleComment'
+          @replyTo='handleReply'
+        />
       </section>
     </article>
     <article class="slider">
@@ -18,25 +24,64 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import SliderDetail from "../../../components/slider/sliderDetail";
 import Comment from "../../../components/comment";
-import { getArticleDetail, getComment } from '@/service/article'
+import {
+  getArticleDetail,
+  addComment,
+  getComment,
+  deleteComment,
+  replyComment
+} from "@/service/article";
 export default {
   data() {
     return {
       article: {},
-      articleId: ''
+      articleId: this.$route.params.id,
+      commentData: []
     }
   },
   created() {
     this.getData()
-    // console.log(this.commentData)
   },
+  computed: mapState({
+    user: state => state.user
+  }),
   methods: {
     getData() {
-      getArticleDetail({id: this.$route.params.id}).then(res => [
+      getArticleDetail({id: this.articleId}).then(res => {
         this.article = res.data
-      ])
+      })
+      getComment({ articleId: this.articleId}).then(res => {
+        this.commentData = res.data;
+      })
+    },
+   handleComment(data) {
+      const params = {
+        articleId: this.articleId,
+        name: this.user.name,
+        content: data.content
+      };
+      addComment(params).then(res => {
+        if (res.code == 200) {
+          // this.data = res.data
+        }
+      });
+   },
+   handleReply(data) {
+     const params = {
+        fromName: this.user.name,
+        toUid: data.replyId,
+        articleId: this.articleId,
+        content: data.content
+      };
+      replyComment(params).then(res => {
+        
+      });
+   },
+    handleDel(id) {
+      deleteComment({ commentId: id }).then(res => {});
     }
   },
   components: {

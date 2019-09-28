@@ -1,6 +1,6 @@
 <template>
   <div class='footer'>
-    <p>© RedSpite | <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">蜀ICP备19003410号</a></p>
+    <p>© Reeyou | <a href="http://www.beian.gov.cn/portal/index.do">粤ICP备19124268号</a></p>
   </div>
 </template>
 
