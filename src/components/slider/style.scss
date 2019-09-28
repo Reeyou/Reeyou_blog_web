@@ -1,3 +1,4 @@
+@import '@/common/color.scss';
 .slider-container {
   width: 100%;
   padding: 0 15px;
@@ -157,15 +158,15 @@
     padding: 14px;
     dl {
       dt {
-        font-size: 22px;
-        margin-bottom: 20px;
+        font-size: 1.3em;
+        margin-bottom: 24px;
       }
       dd {
         display: inline-block;
-        padding: 8px 10px;
-        margin: 0 16px 20px 0;
+        padding: 10px 14px;
+        margin: 0 20px 20px 0;
         font-size: 18px;
-        background: pink;
+        background: $BrightColor;
         border-radius: 6px;
       }
     }

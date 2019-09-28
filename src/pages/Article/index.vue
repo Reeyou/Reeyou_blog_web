@@ -4,7 +4,11 @@
       class='articleList'
       :articleList='ArticleList'
     />
-    <Slider class='slider' />
+    <Slider
+      class='slider'
+      :tagList='tagList'
+      v-if='tagList.length > 0'
+    />
     <!-- <Comment /> -->
   </div>
 </template>
@@ -13,11 +17,12 @@
 import ArticleList from '../../components/articleList'
 import Slider from '../../components/slider/sliderHome'
 import Comment from '../../components/comment'
-import { getArticleList } from '@/service/article'
+import { getArticleList, getTagList } from '@/service/article'
 export default {
   data() {
     return {
-      ArticleList: []
+      ArticleList: [],
+      tagList: []
     }
   },
   created() {
@@ -27,6 +32,9 @@ export default {
     getData() {
       getArticleList().then(res => {
         this.ArticleList = res.data
+      })
+      getTagList().then(res => {
+        this.tagList = res.data
       })
     },
   },

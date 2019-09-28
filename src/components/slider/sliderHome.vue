@@ -36,16 +36,7 @@
     <section class="tagList shadow">
       <dl>
         <dt>文章标签</dt>
-        <dd><a href="">html</a></dd>
-        <dd><a href="">html</a></dd>
-        <dd><a href="">html</a></dd>
-        <dd><a href="">html</a></dd>
-        <dd><a href="">html</a></dd>
-        <dd><a href="">html</a></dd>
-        <dd><a href="">html</a></dd>
-        <dd><a href="">html</a></dd>
-        <dd><a href="">html</a></dd>
-        <dd><a href="">html</a></dd>
+        <dd v-for='(item,index) in tagList' :key='index'><a href="">{{item.tagname}}</a></dd>
       </dl>
     </section>
   </div>
@@ -56,12 +47,25 @@ import cover1 from "../../assets/img/1.jpg";
 import cover2 from "../../assets/img/2.jpg";
 import cover3 from "../../assets/img/3.jpg";
 export default {
+  props: ['tagList'],
   data() {
     return {
+      newTagList: [],
       cover1: { backgroundImage: "url(" + cover1 + ")" },
       cover2: { backgroundImage: "url(" + cover2 + ")" },
       cover3: { backgroundImage: "url(" + cover3 + ")" }
     };
+  },
+  mounted() {
+    // console.log(this.newTagList)
+  },
+  watch: {
+    // tagList(val) {
+    //   if(val) {
+    //     this.newTagList = val
+    //     console.log(val)
+    //   }
+    // }
   }
 };
 </script>

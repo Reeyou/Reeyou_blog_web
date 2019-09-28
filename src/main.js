@@ -7,6 +7,9 @@ import router from './router'
 import './common/index.css'
 import './common/font.css'
 import 'lib-flexible'
+import moment from "moment";
+
+Vue.prototype.$moment = moment;
 // highlight.js代码高亮指令
 import Highlight from './utils/highlight';
  

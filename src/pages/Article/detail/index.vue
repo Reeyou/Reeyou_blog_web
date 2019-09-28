@@ -87,14 +87,13 @@ export default {
         flex: 1;
         margin: 0 0 16px;
         font-size: 1.1em;
-        line-height: 1.42857143;
         color: #333;
         word-break: break-all;
         word-wrap: break-word;
         background-color: #f5f5f5;
         border: 1px solid #ccc;
         border-radius: 5px;
-        line-height: 1.5em;
+        line-height: 1.4em;
         overflow: auto;
       }
     }
