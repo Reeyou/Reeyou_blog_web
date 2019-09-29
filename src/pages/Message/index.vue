@@ -4,6 +4,7 @@
       type="留言"
       :Data='msgData'
       :handleDel='handleDel'
+      :handleDelReply='handleDelReply'
       @commentTo='handleMsg'
       @replyTo='handleReply'
     />
@@ -17,7 +18,8 @@ import {
   getMessage,
   addMessage,
   deleteMsg,
-  replyMsg
+  replyMsg,
+  deleteReplyMsg
  } from '@/service/message'
   export default {
     data() {
@@ -66,6 +68,13 @@ import {
       },
       handleDel(id) {
         deleteMsg({ msgId: id }).then(res => {
+          if(res.code == 200) {
+            this.getData()
+          }
+        })
+      },
+      handleDelReply(id) {
+        deleteReplyMsg({ replyMsgId: id }).then(res => {
           if(res.code == 200) {
             this.getData()
           }

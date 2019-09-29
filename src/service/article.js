@@ -38,3 +38,11 @@ export async function replyComment(params) {
     }
   })
 }
+export async function deleteReply(params) {
+  return request('/api/deleteReply', {
+    method: 'POST',
+    body: {
+      ...params
+    }
+  })
+}

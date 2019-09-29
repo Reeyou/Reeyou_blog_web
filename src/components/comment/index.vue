@@ -22,8 +22,16 @@
       <div class="control">
         <p ref="errMsg" class="errMsg" v-if="errState">请输入{{type}}内容</p>
         <p ref="errMsg" class="errMsg" v-if="loginState">请先登录再发表</p>
-        <button @click="handleComment" class="btn" v-if="btnState">发布</button>
-        <button @click="handleReply" class="btn" v-if="!btnState">回复</button>
+        <button
+          @click="handleComment"
+          class="btn"
+          v-if="btnState"
+        >发布</button>
+        <button
+          @click="handleReply"
+          class="btn"
+          v-if="!btnState"
+        >回复</button>
       </div>
     </section>
     <section class="comment-list">
@@ -37,8 +45,15 @@
             </p>
             <p class="value">{{item.content}}</p>
             <p class="handle">
-              <span class="back hover" @click="handleBack(item.name, item._id)">回复</span>
-              <span class="del hover" @click="handleDel(item._id)">删除</span>
+              <span
+                class="back hover"
+                @click="handleBack(item.name, item._id)"
+              >回复</span>
+              <span
+                class="del hover"
+                v-if='item.name == user.name'
+                @click="handleDel(item._id)"
+              >删除</span>
             </p>
             <div
               class="reply"
@@ -56,8 +71,15 @@
                     </p>
                     <p class="value">{{replyItem.content}}</p>
                     <p class="handle">
-                      <span class="back hover" @click="handleBack(item.name, item._id)">回复</span>
-                      <span class="del hover" @click="handleDel(item._id)">删除</span>
+                      <span
+                        class="back hover"
+                        @click="handleBack(item.name, item._id)"
+                      >回复</span>
+                      <span
+                        class="del hover"
+                        v-if='replyItem.from_name == user.name'
+                        @click="handleDelReply(replyItem._id)"
+                      >删除</span>
                     </p>
                   </div>
                 </li>
@@ -77,10 +99,8 @@ export default {
   props: [
     'type',
     'Data',
-    // 'handleComment',
-    // 'handleBack',
-    // 'handleReply',
-    'handleDel'
+    'handleDel',
+    'handleDelReply'
   ],
   data() {
     return {
@@ -102,7 +122,6 @@ export default {
   }),
   methods: {
     handleLogin() {
-      // console.log(10)
       window.location = config.github; 
     },
     handleLogout() {
@@ -112,14 +131,11 @@ export default {
     handleComment() {
       this.errState = this.inputValue ? false : true;
       this.loginState = JSON.stringify(this.user) === "{}" && !this.errState ? true : false;
+      this.inputValue = ''
       if(!this.errState && !this.loginState) {
         this.$emit('commentTo',{content: this.inputValue})
-        this.inputValue = ''
-      } else {
-        this.inputValue = ''
       }
     },
-    
     handleBack(name, id) {
       this.btnState = false;
       this.inputValue = `@${name}：`;
@@ -127,9 +143,13 @@ export default {
       this.replyId = id;
     },
     handleReply() {
-      this.$emit('replyTo',{content: this.inputValue, replyId: this.replyId})
-      this.errState = this.inputValue ? false : true;
+      console.log(this.inputValue.split('：')[1])
+      this.errState = this.inputValue.split('：')[1] ? false : true;
+      this.loginState = this.user.name ? false : true;
       this.inputValue = ''
+      if(!this.errState && !this.loginState) {
+        this.$emit('replyTo',{content: this.inputValue, replyId: this.replyId})
+      }
     }
   }
 };

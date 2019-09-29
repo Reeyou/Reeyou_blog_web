@@ -12,6 +12,7 @@
           type="评论"
           :Data='commentData'
           :handleDel='handleDel'
+          :handleDelReply='handleDelReply'
           @commentTo='handleComment'
           @replyTo='handleReply'
         />
@@ -32,7 +33,8 @@ import {
   addComment,
   getComment,
   deleteComment,
-  replyComment
+  replyComment,
+  deleteReply
 } from "@/service/article";
 export default {
   data() {
@@ -84,6 +86,13 @@ export default {
    },
     handleDel(id) {
       deleteComment({ commentId: id }).then(res => {
+        if(res.code == 200) {
+          this.getData()
+        }
+      });
+    },
+    handleDelReply(id) {
+      deleteReply({ replyId: id }).then(res => {
         if(res.code == 200) {
           this.getData()
         }

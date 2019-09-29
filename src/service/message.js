@@ -28,3 +28,11 @@ export async function replyMsg(params) {
     }
   })
 }
+export async function deleteReplyMsg(params) {
+  return request('/api/deleteReplyMessage', {
+    method: 'POST',
+    body: {
+      ...params
+    }
+  })
+}

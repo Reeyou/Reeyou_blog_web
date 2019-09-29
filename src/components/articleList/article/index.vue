@@ -2,7 +2,6 @@
   <div class="article">
     <div class="dots"></div>
     <div class="date-container">
-      <p class="trig"></p>
       <router-link
         tag="span"
         class="date"
@@ -87,7 +86,7 @@ $titleColor: #444;
     border: 2px solid $dotColor;
     border-radius: 50%;
     position: absolute;
-    top: 0.3rem;
+    top: 16PX;
     left: -40px;
     z-index: 10;
     background: #fff;
@@ -95,42 +94,44 @@ $titleColor: #444;
   .date-container {
     display: block;
     position: absolute;
-    top: 0.18rem;
+    top: 10PX;
     font-size: 12px;
-    margin-left: 0.5em;
+    margin-left: 10PX;
     transition: 400ms;
     z-index: 10;
     &:hover {
-      margin-left: 0.1em;
+      margin-left: -6PX;
       cursor: pointer;
-      .trig {
-        border-color: $hoverColor transparent transparent transparent;
-      }
       .date {
         background: $hoverColor;
+        &:after {
+          border-color: $hoverColor transparent transparent transparent;
+        }
       }
     }
     .date {
       display: inline-block;
       box-sizing: border-box;
-      padding: .45em 0.5em;
-      height: 2.4em;
+      padding: 0 8PX 0 2PX;
+      height: 26PX;
+      vertical-align: middle;
+      line-height: 26PX;
       font-size: 12PX;
-      vertical-align: top;
       background: $BrightColor;
+      position: relative;
       color: $DeepColor;
-    }
-    .trig {
-      display: inline-block;
-      width: 0;
-      height: 0;
-      position: absolute;
-      top: 0;
-      left: -28PX;
-      border-width: 14PX;
-      border-style: dashed;
-      border-color: $BrightColor transparent transparent transparent;
-      transform: rotate(90deg);
+      &:after {
+        content: '';
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 0;
+        left: -26PX;
+        border-width: 13PX;
+        border-style: dashed;
+        border-color: $BrightColor transparent transparent transparent;
+        transform: rotate(90deg);
+      }
     }
   }
   .container {
@@ -151,7 +152,7 @@ $titleColor: #444;
       overflow: hidden;
       flex: 1;
       .title {
-        margin: .6rem 0 .2rem 0;
+        margin: 30PX 0 .2rem 0;
         font-size: 14PX;
         line-height: 16PX;
         a {
