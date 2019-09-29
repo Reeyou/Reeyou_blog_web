@@ -37,7 +37,7 @@
               </div> -->
               <div class="box bg-gray-lightest">
                 ● 技术博客：
-                <a href="https://www.reeyou.cn" target="_blank">https://www.reeyou.cn</a>
+                <a href="https://www.reeyou.cn" target="_blank">http://www.reeyou.cn</a>
               </div>
             </div>
           </section>

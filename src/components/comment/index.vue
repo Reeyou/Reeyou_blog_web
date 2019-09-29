@@ -21,6 +21,7 @@
       </div>
       <div class="control">
         <p ref="errMsg" class="errMsg" v-if="errState">请输入{{type}}内容</p>
+        <p ref="errMsg" class="errMsg" v-if="loginState">请先登录再发表</p>
         <button @click="handleComment" class="btn" v-if="btnState">发布</button>
         <button @click="handleReply" class="btn" v-if="!btnState">回复</button>
       </div>
@@ -32,7 +33,7 @@
           <div class="con">
             <p class="info">
               <span class="name">{{item.name}}</span>
-              <span class="date">{{$moment(item.create_time).format('YYYY-MM-DD HH:mm:ss')}}</span>
+              <span class="date">{{$moment(item.create_time).format('YYYY/MM/DD HH:mm')}}</span>
             </p>
             <p class="value">{{item.content}}</p>
             <p class="handle">
@@ -51,7 +52,7 @@
                   <div class="con">
                     <p class="info">
                       <span class="name">{{replyItem.from_name}}</span>
-                      <span class="date">{{$moment(replyItem.create_time).format('YYYY-MM-DD HH:mm:ss')}}</span>
+                      <span class="date">{{$moment(replyItem.create_time).format('YYYY/MM/DD HH:mm')}}</span>
                     </p>
                     <p class="value">{{replyItem.content}}</p>
                     <p class="handle">
@@ -71,6 +72,7 @@
 
 <script>
 import { mapState } from "vuex";
+import config from '@/config'
 export default {
   props: [
     'type',
@@ -85,6 +87,7 @@ export default {
       state: false,
       inputValue: "",
       comment: "",
+      loginState: false,
       errState: false,
       btnState: true,
       replyName: "",
@@ -99,15 +102,22 @@ export default {
   }),
   methods: {
     handleLogin() {
-      window.location =
-        "https://github.com/login/oauth/authorize?client_id=Iv1.0332894e1a1d8b33&redirect_uri=http://localhost:8080/oauth/redirect";
+      // console.log(10)
+      window.location = config.github; 
     },
     handleLogout() {
       localStorage.removeItem("userinfo");
+      this.state = false
     },
     handleComment() {
-      this.$emit('commentTo',{content: this.inputValue})
       this.errState = this.inputValue ? false : true;
+      this.loginState = JSON.stringify(this.user) === "{}" && !this.errState ? true : false;
+      if(!this.errState && !this.loginState) {
+        this.$emit('commentTo',{content: this.inputValue})
+        this.inputValue = ''
+      } else {
+        this.inputValue = ''
+      }
     },
     
     handleBack(name, id) {
@@ -119,6 +129,7 @@ export default {
     handleReply() {
       this.$emit('replyTo',{content: this.inputValue, replyId: this.replyId})
       this.errState = this.inputValue ? false : true;
+      this.inputValue = ''
     }
   }
 };

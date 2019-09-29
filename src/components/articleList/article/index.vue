@@ -3,7 +3,11 @@
     <div class="dots"></div>
     <div class="date-container">
       <p class="trig"></p>
-      <router-link tag="span" class="date" :to="{name: 'detail', params: {id: articleId}}">2019.9.9</router-link>
+      <router-link
+        tag="span"
+        class="date"
+        :to="{name: 'detail', params: {id: articleId}}"
+      >{{$moment(article.create_time).format('YYYY/MM/DD')}}</router-link>
     </div>
     <div class="container">
       <div class="line"></div>
@@ -21,22 +25,43 @@
         </div>
       </div>
       <div class="cover-img">
-        <img :src="article.poster" alt />
+        <spin class='loading' v-if='loading' />
+        <img :src="poster_url" v-else alt />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import spin from '@/components/loading/spin'
+import loadingPic from '@/assets/logo.png'
 export default {
   props: ["article"],
   data() {
     return {
-      articleId: this.article._id
+      loading: true,
+      articleId: this.article._id,
+      poster_url: ''
     };
   },
   watch: {},
-  created() {}
+  created() {},
+  mounted() {
+    // 图片加载loading
+    var newImg = new Image()
+    newImg.src = this.article.poster
+    newImg.onerror = () => { // 图片加载错误时的替换图片
+      this.loading = false
+      newImg.src = ''
+    }
+    newImg.onload = () => { // 图片加载成功后把地址给原来的img
+      this.loading = false
+      this.poster_url = newImg.src
+    }
+  },
+  components: {
+    spin
+  }
 };
 </script>
 
@@ -87,9 +112,10 @@ $titleColor: #444;
     }
     .date {
       display: inline-block;
-      padding: 0 0.5em;
+      box-sizing: border-box;
+      padding: .45em 0.5em;
       height: 2.4em;
-      line-height: 2.4em;
+      font-size: 12PX;
       vertical-align: top;
       background: $BrightColor;
       color: $DeepColor;
@@ -100,8 +126,8 @@ $titleColor: #444;
       height: 0;
       position: absolute;
       top: 0;
-      left: -2.3em;
-      border-width: 1.2em;
+      left: -28PX;
+      border-width: 14PX;
       border-style: dashed;
       border-color: $BrightColor transparent transparent transparent;
       transform: rotate(90deg);
@@ -126,8 +152,8 @@ $titleColor: #444;
       flex: 1;
       .title {
         margin: .6rem 0 .2rem 0;
-        font-size: 1.2em;
-        line-height: 18px;
+        font-size: 14PX;
+        line-height: 16PX;
         a {
           color: $titleColor;
           &:hover {
@@ -136,20 +162,23 @@ $titleColor: #444;
         }
       }
       .descript {
-        font-size: 1em;
-        line-height: 1.6em;
-        text-align: justify;
+        font-size: 13PX;
+        line-height: 15PX;
+        text-align: left;
+        // letter-spacing: 1PX;
       }
       .tagList {
         position: absolute;
-        bottom: 58px;
+        bottom: 22px;
         margin: 10px 0;
+        font-size: 12PX;
         a {
           color: $DeepColor;
           padding: 6px 20px;
           border-radius: 8px;
           background: $BrightColor;
           // text-decoration: underline;
+          font-size: 14PX;
           &:hover {
             cursor: pointer;
             text-decoration: underline;
@@ -162,11 +191,21 @@ $titleColor: #444;
     }
     .cover-img {
       flex: 0 0 200px;
+      height: 190px;
       margin-top: .45rem;
+      justify-content: center;
+      align-items: center;
+      position: relative;
       img {
         width: 200px;
         height: 190px;
         border-radius: 10px;
+      }
+      .loading {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -20px;
       }
     }
   }

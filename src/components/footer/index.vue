@@ -16,7 +16,7 @@
     p {
       width: 100%;
       text-align: center;
-      font-size: .8em;
+      font-size: 12PX;
       line-height: 3em;
     }
   }

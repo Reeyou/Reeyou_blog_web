@@ -5,7 +5,7 @@
       <section class="content" v-highlightB v-html='article.content'>
       </section>
       <section class="foot">
-        <div class="date">2019.09.09</div>
+        <div class="date">{{$moment(article.create_time).format('YYYY/MM/DD')}}</div>
       </section>
       <section class='comment'>
         <Comment
@@ -65,7 +65,7 @@ export default {
       };
       addComment(params).then(res => {
         if (res.code == 200) {
-          // this.data = res.data
+          this.getData()
         }
       });
    },
@@ -77,11 +77,17 @@ export default {
         content: data.content
       };
       replyComment(params).then(res => {
-        
+        if(res.code == 200) {
+          this.getData()
+        }
       });
    },
     handleDel(id) {
-      deleteComment({ commentId: id }).then(res => {});
+      deleteComment({ commentId: id }).then(res => {
+        if(res.code == 200) {
+          this.getData()
+        }
+      });
     }
   },
   components: {
@@ -104,17 +110,18 @@ export default {
     text-align: center;
     .title {
       margin: 10px 0 20px 0;
-      font-size: 1.5em;
+      font-size: 16PX;
       font-weight: 400;
       color: #111;
     }
     .content {
       margin: 0;
-      font-size: 1em;
+      font-size: 12PX;
       text-align: justify;
       line-height: 1.6em;
       >>> h2 {
-        font-size: 20px;
+        font-size: 12PX;
+        font-weight: bold;
       }
       & >>> *{
         margin-bottom: 0.7em;
@@ -131,7 +138,7 @@ export default {
         // max-width: 800px;
         flex: 1;
         margin: 0 0 16px;
-        font-size: 1.1em;
+        font-size: 13PX;
         color: #333;
         word-break: break-all;
         word-wrap: break-word;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="loader-inner ball-spin-fade-loader">
+    <div class="ball-spin-fade-loader">
       <div></div>
       <div></div>
       <div></div>
@@ -18,12 +18,12 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-
+@import '@/common/color.scss';
 .ball-spin-fade-loader {
   position: relative;
 }
 .ball-spin-fade-loader > div {
-  background-color: #ed5565;
+  background-color: $spinColor;
   width: 15px;
   height: 15px;
   border-radius: 100%;

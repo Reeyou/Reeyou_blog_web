@@ -48,6 +48,7 @@ import {
         addMessage(params).then(res => {
           if (res.code == 200) {
             // this.data = res.data
+            this.getData()
           }
         });
       },
@@ -58,11 +59,17 @@ import {
           content: data.content
         };
         replyMsg(params).then(res => {
-          
+          if(res.code == 200) {
+            this.getData()
+          }
         });
       },
       handleDel(id) {
-        deleteMsg({ msgId: id }).then(res => {})
+        deleteMsg({ msgId: id }).then(res => {
+          if(res.code == 200) {
+            this.getData()
+          }
+        })
       }
     },
     components: {
@@ -75,5 +82,7 @@ import {
 .message {
   max-width: 800PX;
   margin: 40px auto 0;
+  box-sizing: border-box;
+  padding: 0 20px;
 }
 </style>

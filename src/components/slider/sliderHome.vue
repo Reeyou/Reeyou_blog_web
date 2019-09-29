@@ -29,8 +29,6 @@
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>
-        <dd><a href="">移动web性能优化从入门到进阶</a></dd>
-        <dd><a href="">移动web性能优化从入门到进阶</a></dd>
       </dl>
     </section>
     <section class="tagList shadow">

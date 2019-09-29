@@ -4,10 +4,10 @@
       <router-link
         tag='li'
         v-for='(item,index) in tabList'
-        :to="{name: item.path}"
+        :to="{name: item.name}"
         :key='index'
         @click.native="handleClick(index)"
-        :class="[currentIndex == index ? 'active' : '']"
+        :class="[isActive == item.name || currentIndex == index ? 'active' : '']"
       >{{item.label}}</router-link>
     </ul>
   </div>
@@ -17,21 +17,26 @@
   export default {
     data() {
       return {
-        currentIndex: 1,
+        currentIndex: null,
         tabList: [
           {
             label: '简历',
-            path: 'resume'
+            name: 'resume'
           },
           {
             label: '点滴',
-            path: 'article'
+            name: 'article'
           },
           {
             label: '留言',
-            path: 'message'
+            name: 'message'
           },
         ]
+      }
+    },
+    computed: {
+      isActive: function() {
+        return this.$route.name
       }
     },
     created() {
