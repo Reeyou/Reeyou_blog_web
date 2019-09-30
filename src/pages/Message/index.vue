@@ -38,7 +38,6 @@ import {
         getMessage().then(res => {
           if(res.code == 200) {
             this.msgData = res.data
-            console.log(this.msgData)
           }
         })
       },
@@ -49,7 +48,6 @@ import {
         };
         addMessage(params).then(res => {
           if (res.code == 200) {
-            // this.data = res.data
             this.getData()
           }
         });

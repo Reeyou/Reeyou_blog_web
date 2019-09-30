@@ -22,11 +22,7 @@ import { sendCode } from '@/service/login'
         sendCode({code: uriCode}).then(res => {
           if(res.code == 200) {
             this.$router.go(-1)
-            // this.$store.commit('showStatus',10)
-            this.$store.dispatch('changeCount')
             localStorage.setItem('userinfo',JSON.stringify(res.data))
-            // let nextPage = this.$route.query.next
-            // this.$router.push({ path: nextPage });
           }
         })
       }

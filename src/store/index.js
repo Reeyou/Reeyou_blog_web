@@ -1,12 +1,13 @@
 import vue from 'vue'
 import Vuex from 'vuex'
-import { COUNT,USER } from './mutation_types'
+import { COUNT,USER,SELECT_TAB } from './mutation_types'
 
 vue.use(Vuex)
 
 const state = {
   count: 1,
   user: localStorage["userinfo"] ? JSON.parse(localStorage["userinfo"]): {},
+  selectTab: sessionStorage.getItem('selectTab') ? JSON.parse(sessionStorage.getItem('selectTab')) : 'article'
 }
 
  const mutations = {
@@ -15,6 +16,10 @@ const state = {
   },
   [USER](state, data) {
     state.user = data
+  },
+  // tab栏改变状态
+  [SELECT_TAB](state, data) {
+    state.selectTab = data
   }
   
 }
@@ -25,6 +30,9 @@ const state = {
   },
   getUserInfo(context) {
     context.commit('USER',{A:1})
+  },
+  changeTab({ commit }, data) {
+    commit('SELECT_TAB',data)
   }
 }
 

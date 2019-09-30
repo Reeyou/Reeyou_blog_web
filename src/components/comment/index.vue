@@ -127,6 +127,7 @@ export default {
     handleLogout() {
       localStorage.removeItem("userinfo");
       this.state = false
+      this.user.name = ''
     },
     handleComment() {
       this.errState = this.inputValue ? false : true;
@@ -143,7 +144,6 @@ export default {
       this.replyId = id;
     },
     handleReply() {
-      console.log(this.inputValue.split('：')[1])
       this.errState = this.inputValue.split('：')[1] ? false : true;
       this.loginState = this.user.name ? false : true;
       this.inputValue = ''

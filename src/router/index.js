@@ -12,7 +12,7 @@ export default new Router({
       name: 'Main',
       component: Main,
       children: [
-        {path: 'article', name: 'article', component: () => import('@/pages/Article')},
+        {path: '', name: 'article', component: () => import('@/pages/Article')},
         {path: 'detail/:id', name: 'detail', component: () => import('@/pages/Article/detail')},
         {path: 'resume', name: 'resume', component: () => import('@/pages/Resume')},
         {path: 'message', name: 'message', component: () => import('@/pages/Message')},
