@@ -1,20 +1,33 @@
 <template>
   <div class='container'>
-    <ArticleList
-      class='articleList'
-      :articleList='ArticleList'
-    />
+    <div class="box">
+      <Article
+        class='article'
+        v-for='(item,index) in ArticleList'
+        :key='index'
+        :article='item'
+      />
+      <div class="page">
+        <Pagination
+          :totalPage=total
+          :pageSize=page
+          limit=5
+          @handleChangePage='handleChangePage'
+          v-if='total > 0'
+        />
+      </div>
+    </div>
     <Slider
       class='slider'
       :tagList='tagList'
       v-if='tagList.length > 0'
     />
-    <!-- <Comment /> -->
   </div>
 </template>
 
 <script>
-import ArticleList from '../../components/articleList'
+import Article from '../../components/Article'
+import Pagination from '../../components/Pagination'
 import Slider from '../../components/slider/sliderHome'
 import Comment from '../../components/comment'
 import { getArticleList, getTagList } from '@/service/article'
@@ -22,26 +35,35 @@ export default {
   data() {
     return {
       ArticleList: [],
-      tagList: []
+      tagList: [],
+      total: 0,
+      page: 1
     }
   },
   created() {
-    this.getData()
-    console.log(11)
-    console.log(this.tagList.length)
+    this.getArticleData()
+    this.getTagData()
   },
   methods: {
-    getData() {
-      getArticleList().then(res => {
-        this.ArticleList = res.data
+    getArticleData(pageSize = 1,limit = 5) {
+      getArticleList({pageSize,limit}).then(res => {
+        this.ArticleList = res.data.list
+        this.total = Math.ceil(res.data.total / 5)
       })
+    },
+    getTagData() {
       getTagList().then(res => {
         this.tagList = res.data
       })
     },
+    handleChangePage(pageSize) {
+      this.page = pageSize
+      this.getArticleData(pageSize)
+    }
   },
   components: {
-    ArticleList,
+    Article,
+    Pagination,
     Slider,
     Comment
   }
@@ -49,15 +71,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$BrightColor: #f7f3ee;
 .container {
-  max-width: 100%;
+  width: 100%;
   margin-top: 80px;
   display: flex;
-  .articleList {
+  .box {
     flex: 1;
+    .article {
+       border-bottom: 1px solid $BrightColor;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+     .page {
+      width: 100%;
+      margin-top: 60px;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
   }
   .slider {
     margin-top: 0.18rem;
+    padding-left: 20px;
     flex: 0 0 25%;
   }
 }

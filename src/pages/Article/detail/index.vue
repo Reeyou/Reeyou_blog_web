@@ -4,7 +4,7 @@
       <section class="title">{{article.title}}</section>
       <section class="content" v-highlightB v-html='article.content'>
       </section>
-      <section class="foot">
+      <section class="foot" v-if='dateVisble'>
         <div class="date">{{$moment(article.create_time).format('YYYY/MM/DD')}}</div>
       </section>
       <section class='comment'>
@@ -15,11 +15,12 @@
           :handleDelReply='handleDelReply'
           @commentTo='handleComment'
           @replyTo='handleReply'
+          v-if='commentData.length > 0'
         />
       </section>
     </article>
     <article class="slider">
-      <SliderDetail />
+      <SliderDetail v-if='commentData.length > 0' />
     </article>
   </div>
 </template>
@@ -41,22 +42,32 @@ export default {
     return {
       article: {},
       articleId: this.$route.params.id,
-      commentData: []
+      commentData: [],
+      dateVisble: false
     }
   },
   created() {
     this.getData()
   },
-  computed: mapState({
-    user: state => state.user
-  }),
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
+  },
+  watch: {
+    article(val,oldVal) {
+      if(val !== oldVal) {
+        this.dateVisble = true
+      }
+    }
+  },
   methods: {
     getData() {
       getArticleDetail({id: this.articleId}).then(res => {
         this.article = res.data
       })
-      getComment({ articleId: this.articleId}).then(res => {
-        this.commentData = res.data;
+      getComment({ pageSize: 1,limit: 5,articleId: this.articleId}).then(res => {
+        this.commentData = res.data.list;
       })
     },
    handleComment(data) {
@@ -128,8 +139,24 @@ export default {
       font-size: 12PX;
       text-align: justify;
       line-height: 1.6em;
+      >>> h1 {
+        font-size: 14PX;
+        font-weight: bold;
+      }
       >>> h2 {
-        font-size: 12PX;
+        font-size: 14PX;
+        font-weight: bold;
+      }
+      >>> h3 {
+        font-size: 14PX;
+        font-weight: bold;
+      }
+      >>> h4 {
+        font-size: 14PX;
+        font-weight: bold;
+      }
+      >>> h5 {
+        font-size: 14PX;
         font-weight: bold;
       }
       & >>> *{
@@ -147,7 +174,7 @@ export default {
         // max-width: 800px;
         flex: 1;
         margin: 0 0 16px;
-        font-size: 13PX;
+        font-size: 14PX;
         color: #333;
         word-break: break-all;
         word-wrap: break-word;
@@ -155,6 +182,7 @@ export default {
         border: 1px solid #ccc;
         border-radius: 5px;
         line-height: 1.4em;
+        letter-spacing: 0.5PX;
         overflow: auto;
       }
     }

@@ -154,7 +154,7 @@ $titleColor: #444;
       .title {
         margin: 30PX 0 .2rem 0;
         font-size: 14PX;
-        line-height: 16PX;
+        line-height: 18PX;
         a {
           color: $titleColor;
           &:hover {
@@ -164,9 +164,8 @@ $titleColor: #444;
       }
       .descript {
         font-size: 13PX;
-        line-height: 15PX;
+        line-height: 17PX;
         text-align: left;
-        // letter-spacing: 1PX;
       }
       .tagList {
         position: absolute;

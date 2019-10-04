@@ -7,6 +7,7 @@
       :handleDelReply='handleDelReply'
       @commentTo='handleMsg'
       @replyTo='handleReply'
+      v-if='msgData.length > 0'
     />
   </div>
 </template>

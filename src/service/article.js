@@ -2,17 +2,17 @@ import request from '@/utils/request'
 import formatParam from '@/utils/formatParam'
 
 
-export async function getArticleList() {
-  return request('/api/getArticleList')
+export async function getArticleList(params) {
+  return request(`/api/getArticleList?${formatParam(params)}`)
 }
 export async function getTagList() {
   return request('/api/getTagList')
 }
 export async function getArticleDetail(params) {
-  return request(`/api/getArticleDetail/${formatParam(params)}`)
+  return request(`/api/getArticleDetail?${formatParam(params)}`)
 }
 export async function getComment(params) {
-  return request(`/api/getComment/${formatParam(params)}`)
+  return request(`/api/getComment?${formatParam(params)}`)
 }
 export async function addComment(params) {
   return request('/api/addComment', {

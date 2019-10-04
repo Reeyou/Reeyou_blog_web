@@ -3,20 +3,33 @@
     <Mine />
     <Tab />
     <div class="content">
+      <div v-if='loading' class="loading">
+        <Spin class='spin' />
+      </div>
       <router-view />
     </div>
-    <Footer />
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Mine from "../components/mine";
 import Tab from "../components/tab";
+import Spin from '@/components/loading/spin'
 import Footer from "../components/footer";
 export default {
+  computed: {
+    loading() {
+      return this.$store.state.loading
+    }
+  },
+  created() {
+    console.log(this.loading)
+  },
   components: {
     Mine,
     Tab,
+    Spin,
     Footer
   }
 };
@@ -26,7 +39,23 @@ export default {
 .layout {
   padding: 60px 0 40px 0 ;
   max-width: 1200PX;
-  // max-width: 22.222222rem /* 1200/54 */;
   margin: 0 auto;
+  .content {
+    width: 100%;
+    .loading {
+      // position: absolute;
+      // left: 0;
+      width: 100%;
+      height: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      .spin {
+        // position: a;
+        height: 100px;
+      }
+    }
+  }
 }
 </style>

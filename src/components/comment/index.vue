@@ -132,10 +132,10 @@ export default {
     handleComment() {
       this.errState = this.inputValue ? false : true;
       this.loginState = JSON.stringify(this.user) === "{}" && !this.errState ? true : false;
-      this.inputValue = ''
       if(!this.errState && !this.loginState) {
         this.$emit('commentTo',{content: this.inputValue})
       }
+      this.inputValue = ''
     },
     handleBack(name, id) {
       this.btnState = false;
@@ -146,10 +146,10 @@ export default {
     handleReply() {
       this.errState = this.inputValue.split('：')[1] ? false : true;
       this.loginState = this.user.name ? false : true;
-      this.inputValue = ''
       if(!this.errState && !this.loginState) {
         this.$emit('replyTo',{content: this.inputValue, replyId: this.replyId})
       }
+      this.inputValue = ''
     }
   }
 };
