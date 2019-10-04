@@ -6,7 +6,7 @@
         v-for='(item,index) in tabList'
         :to="{name: item.name}"
         :key='index'
-        @click.native="handleClick(index)"
+        @click="handleClick(index)"
         :class="[isActive == item.name || currentIndex == index ? 'active' : '']"
       >{{item.label}}</router-link>
     </ul>
