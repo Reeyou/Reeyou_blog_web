@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="cover-img">
-        <spin class='loading' v-if='loading' />
+        <div class='loading' v-if='loading'></div>
         <img :src="poster_url" v-else alt />
       </div>
     </div>
@@ -202,10 +202,10 @@ $titleColor: #444;
         border-radius: 10px;
       }
       .loading {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-top: -20px;
+        width: 200px;
+        height: 190px;
+        border-radius: 10px;
+        background: $BrightColor;
       }
     }
   }

@@ -75,7 +75,7 @@ export default {
   overflow: hidden;
   .pageInfo {
     float: left;
-    padding: 12px 16px;
+    padding: 12px 0;
     border-radius: 6px;
     background: #f7f3ee;
     border: 1px solid #eee;

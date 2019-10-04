@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <Mine />
-    <Tab />
+    <Nav />
     <div class="content">
       <div v-if='loading' class="loading">
         <Spin class='spin' />
@@ -14,7 +14,7 @@
 
 <script>
 import Mine from "../components/mine";
-import Tab from "../components/tab";
+import Nav from "../components/Nav";
 import Spin from '@/components/loading/spin'
 import Footer from "../components/footer";
 export default {
@@ -28,7 +28,7 @@ export default {
   },
   components: {
     Mine,
-    Tab,
+    Nav,
     Spin,
     Footer
   }

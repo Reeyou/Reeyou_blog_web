@@ -78,6 +78,8 @@ $BrightColor: #f7f3ee;
   display: flex;
   .box {
     flex: 1;
+    box-sizing: border-box;
+    padding: 0 20px 0 60px;
     .article {
        border-bottom: 1px solid $BrightColor;
       &:last-child {
