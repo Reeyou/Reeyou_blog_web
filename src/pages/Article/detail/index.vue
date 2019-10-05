@@ -4,7 +4,7 @@
       <section class="title">{{article.title}}</section>
       <section class="content" v-highlightB v-html='article.content'>
       </section>
-      <section class="foot" v-if='dateVisble'>
+      <section class="foot" v-if='showVisble'>
         <div class="date">{{$moment(article.create_time).format('YYYY/MM/DD')}}</div>
       </section>
       <section class='comment'>
@@ -15,13 +15,13 @@
           :handleDelReply='handleDelReply'
           @commentTo='handleComment'
           @replyTo='handleReply'
-          v-if='commentData.length > 0'
+          v-if='showVisble'
         />
       </section>
     </article>
-    <article class="slider">
-      <SliderDetail v-if='commentData.length > 0' />
-    </article>
+    <!-- <article class="slider">
+      <SliderDetail v-if='showVisble' />
+    </article> -->
   </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
       article: {},
       articleId: this.$route.params.id,
       commentData: [],
-      dateVisble: false
+      showVisble: false
     }
   },
   created() {
@@ -57,7 +57,7 @@ export default {
   watch: {
     article(val,oldVal) {
       if(val !== oldVal) {
-        this.dateVisble = true
+        this.showVisble = true
       }
     }
   },
@@ -119,12 +119,14 @@ export default {
 
 <style lang="scss" scoped>
 .detail {
-  max-width: 100%;
+  // max-width: 100%;
+  max-width: 800PX;
+  margin: 0 auto;
   box-sizing: border-box;
   padding: 0 15px;
-  display: flex;
+  // display: flex;
   .detail-container {
-    flex: 1;
+    // flex: 1;
     padding: 28px;
     box-sizing: border-box;
     text-align: center;
@@ -201,13 +203,13 @@ export default {
       margin-top: 40px;
     }
   }
-  .slider {
-    flex: 0 0 25%;
-    margin-top: 80px;
-    // margin-right: 40px;
-    padding: 0 40px;
-    box-sizing: border-box;
-  }
+  // .slider {
+  //   flex: 0 0 25%;
+  //   margin-top: 80px;
+  //   // margin-right: 40px;
+  //   padding: 0 40px;
+  //   box-sizing: border-box;
+  // }
 }
 @media screen and (max-width: 800px) {
   .detail {

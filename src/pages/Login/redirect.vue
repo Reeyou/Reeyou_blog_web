@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Spin from '../../components/loading/spin'
+import Spin from '../../components/Loading'
 import { sendCode } from '@/service/login'
   export default {
     data() {
@@ -20,10 +20,10 @@ import { sendCode } from '@/service/login'
       sendCode() {
         let uriCode = this.$route.query.code
         sendCode({code: uriCode}).then(res => {
-          if(res.code == 200) {
+          // if(res.code == 200) {
             this.$router.go(-1)
             localStorage.setItem('userinfo',JSON.stringify(res.data))
-          }
+          // }
         })
       }
     },

@@ -9,7 +9,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Main',
       component: Main,
       children: [
         {path: '', name: 'article', component: () => import('@/pages/Article')},

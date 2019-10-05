@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import Mine from "../components/mine";
+import Mine from "../components/Mine";
 import Nav from "../components/Nav";
-import Spin from '@/components/loading/spin'
-import Footer from "../components/footer";
+import Spin from '@/components/Loading'
+import Footer from "../components/Footer";
 export default {
   computed: {
     loading() {

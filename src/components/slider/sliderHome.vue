@@ -23,7 +23,7 @@
     </section>
     <section class="recommend shadow">
       <dl>
-        <dt>最近文章</dt>
+        <dt>推荐文章</dt>
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>

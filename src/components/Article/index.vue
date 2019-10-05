@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import spin from '@/components/loading/spin'
+import spin from '@/components/Loading'
 import loadingPic from '@/assets/logo.png'
 export default {
   props: ["article"],
