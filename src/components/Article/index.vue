@@ -44,7 +44,9 @@ export default {
     };
   },
   watch: {},
-  created() {},
+  created() {
+    console.log(this.article)
+  },
   mounted() {
     // 图片加载loading
     var newImg = new Image()

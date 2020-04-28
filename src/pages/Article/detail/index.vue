@@ -8,7 +8,7 @@
         <div class="date">{{$moment(article.create_time).format('YYYY/MM/DD')}}</div>
       </section>
       <section class='comment'>
-        <Comment
+        <!-- <Comment
           type="评论"
           :Data='commentData'
           :handleDel='handleDel'
@@ -16,7 +16,7 @@
           @commentTo='handleComment'
           @replyTo='handleReply'
           v-if='showVisble'
-        />
+        /> -->
       </section>
     </article>
     <!-- <article class="slider">

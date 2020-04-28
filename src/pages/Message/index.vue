@@ -1,6 +1,6 @@
 <template>
   <div class='message'>
-    <Comment
+    <!-- <Comment
       type="留言"
       :Data='msgData'
       :handleDel='handleDel'
@@ -8,7 +8,7 @@
       @commentTo='handleMsg'
       @replyTo='handleReply'
       v-if='msgData.length > 0'
-    />
+    /> -->
   </div>
 </template>
 

@@ -14,11 +14,11 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="scss" scoped>
-@import '@/common/color.scss';
+@import "@/common/color.scss";
 .ball-spin-fade-loader {
   position: relative;
 }

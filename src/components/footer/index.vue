@@ -1,6 +1,6 @@
 <template>
   <div class='footer'>
-    <p>© Reeyou | <a href="http://www.beian.gov.cn/portal/index.do">粤ICP备19124268号</a></p>
+    <p>© Reeyou版权所有 | <a href="http://www.beian.gov.cn/portal/index.do">粤ICP备19124268号</a></p>
   </div>
 </template>
 

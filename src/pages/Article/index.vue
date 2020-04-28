@@ -1,27 +1,18 @@
 <template>
-  <div class='container'>
+  <div class="container">
     <div class="box">
-      <Article
-        class='article'
-        v-for='(item,index) in ArticleList'
-        :key='index'
-        :article='item'
-      />
+      <Article class="article" v-for="(item,index) in ArticleList" :key="index" :article="item" />
       <div class="page">
         <Pagination
-          :totalPage=total
-          :pageSize=page
-          limit=5
-          @handleChangePage='handleChangePage'
-          v-if='total > 0'
+          :totalPage="total"
+          :pageSize="page"
+          limit="5"
+          @handleChangePage="handleChangePage"
+          v-if="total > 0"
         />
       </div>
     </div>
-    <Slider
-      class='slider'
-      :tagList='tagList'
-      v-if='tagList.length > 0'
-    />
+    <Slider class="slider" :tagList="tagList" v-if="tagList.length > 0" />
   </div>
 </template>
 
@@ -32,7 +23,7 @@ import Slider from '../../components/slider/sliderHome'
 import Comment from '../../components/comment'
 import { getArticleList, getTagList } from '@/service/article'
 export default {
-  data() {
+  data () {
     return {
       ArticleList: [],
       tagList: [],
@@ -40,23 +31,23 @@ export default {
       page: 1
     }
   },
-  created() {
+  created () {
     this.getArticleData()
     this.getTagData()
   },
   methods: {
-    getArticleData(pageSize = 1,limit = 5) {
-      getArticleList({pageSize,limit}).then(res => {
+    getArticleData (pageSize = 1, limit = 5) {
+      getArticleList({ pageSize, limit }).then(res => {
         this.ArticleList = res.data.list
         this.total = Math.ceil(res.data.total / 5)
       })
     },
-    getTagData() {
+    getTagData () {
       getTagList().then(res => {
         this.tagList = res.data
       })
     },
-    handleChangePage(pageSize) {
+    handleChangePage (pageSize) {
       this.page = pageSize
       this.getArticleData(pageSize)
     }
@@ -81,12 +72,12 @@ $BrightColor: #f7f3ee;
     box-sizing: border-box;
     padding: 0 20px 0 60px;
     .article {
-       border-bottom: 1px solid $BrightColor;
+      border-bottom: 1px solid $BrightColor;
       &:last-child {
         border-bottom: none;
       }
     }
-     .page {
+    .page {
       width: 100%;
       margin-top: 60px;
       padding: 0 10px;
@@ -99,7 +90,7 @@ $BrightColor: #f7f3ee;
     flex: 0 0 25%;
   }
 }
-@media screen and (max-width: 800px){
+@media screen and (max-width: 800px) {
   .container {
     .slider {
       display: none;
