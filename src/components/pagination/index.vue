@@ -20,53 +20,53 @@
  * @limit     每页条数
  */
 export default {
-  props: ['totalPage','pageSize','limit'],
-  data() {
+  props: ['totalPage', 'pageSize', 'limit'],
+  data () {
     return {
-      currentPage: this.pageSize,
-    };
+      currentPage: this.pageSize
+    }
   },
   computed: {
-    firstState() {
+    firstState () {
       return this.currentPage > 1
     },
-    lastState() {
+    lastState () {
       return this.currentPage > 0 && this.currentPage < this.totalPage
     },
-    prevState() {
+    prevState () {
       return this.currentPage > 1
     },
-    nextState() {
+    nextState () {
       return this.currentPage < this.totalPage
     }
   },
   methods: {
-    changePage(e) {
+    changePage (e) {
       //   /* 事件委托 */
       switch (e.target.id) {
-        case "first":
-          this.currentPage = 1;
-          break;
-        case "prev":
+        case 'first':
+          this.currentPage = 1
+          break
+        case 'prev':
           if (this.currentPage > 1) {
-            this.currentPage--;
+            this.currentPage--
           }
-          break;
-        case "next":
+          break
+        case 'next':
           if (this.currentPage < this.totalPage) {
-            this.currentPage++;
+            this.currentPage++
           }
-          break;
-        case "last":
-          this.currentPage = this.totalPage;
-          break;
+          break
+        case 'last':
+          this.currentPage = this.totalPage
+          break
         default:
-          break;
+          break
       }
-      this.$emit("handleChangePage", this.currentPage);
+      this.$emit('handleChangePage', this.currentPage)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

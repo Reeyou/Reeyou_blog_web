@@ -1,7 +1,9 @@
 <template>
-  <div class="layout">
-    <Mine />
-    <Nav />
+  <div>
+    <nav-bar />
+    <div class="layout">
+      <Mine />
+      <Nav style="margin-top: 20px" />
     <div class="content">
       <div v-if='loading' class="loading">
         <Spin class='spin' />
@@ -9,30 +11,33 @@
       <router-view />
     </div>
     <Footer/>
+    </div>
   </div>
 </template>
 
 <script>
-import Mine from "../components/Mine";
-import Nav from "../components/Nav";
+import NavBar from '@/components/NavBar'
+import Mine from '../components/Mine'
+import Nav from '../components/Nav'
 import Spin from '@/components/Loading'
-import Footer from "../components/Footer";
+import Footer from '../components/Footer'
 export default {
   computed: {
-    loading() {
+    loading () {
       return this.$store.state.loading
     }
   },
-  created() {
+  created () {
     console.log(this.loading)
   },
   components: {
+    'nav-bar': NavBar,
     Mine,
     Nav,
     Spin,
     Footer
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
