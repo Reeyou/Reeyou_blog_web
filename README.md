@@ -12,7 +12,7 @@
 
 ## 线上预览
 
-  [https://www.reeyou.cn](https://www.reeyou.cn)
+  [http://www.reeyou.cn](http://www.reeyou.cn)
 
 
 ## 后台管理
