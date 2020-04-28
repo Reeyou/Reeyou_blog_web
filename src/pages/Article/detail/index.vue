@@ -1,8 +1,8 @@
 <template>
   <div class="detail">
-    <article class="detail-container">
+    <div class="detail-container">
       <section class="title">{{article.title}}</section>
-      <section class="content" v-highlightB v-html='article.content'>
+      <section class="detail-content" v-highlightB v-html='article.content'>
       </section>
       <section class="foot" v-if='showVisble'>
         <div class="date">{{$moment(article.create_time).format('YYYY/MM/DD')}}</div>
@@ -18,36 +18,59 @@
           v-if='showVisble'
         /> -->
       </section>
-    </article>
-    <!-- <article class="slider">
-      <SliderDetail v-if='showVisble' />
-    </article> -->
+    </div>
+    <div class="slider">
+      <SliderDetail :data="listData" v-if='showVisble' />
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-import SliderDetail from "../../../components/slider/sliderDetail";
-import Comment from "../../../components/comment";
+import { mapState } from 'vuex'
+import SliderDetail from '../../../components/slider/sliderDetail'
+import Comment from '../../../components/comment'
 import {
   getArticleDetail,
   addComment,
-  getComment,
+  // getComment,
   deleteComment,
   replyComment,
   deleteReply
-} from "@/service/article";
+} from '@/service/article'
 export default {
-  data() {
+  data () {
     return {
       article: {},
       articleId: this.$route.params.id,
       commentData: [],
-      showVisble: false
+      showVisble: false,
+      listData: []
     }
   },
-  created() {
+  created () {
     this.getData()
+  },
+  mounted () {
+    this.$nextTick(() => {
+      window.addEventListener('load', () => {
+        const el = document.querySelector('.detail-content')
+
+        for (let i = 0; i < el.children.length; i++) {
+          let obj = {}
+          if (el.children[i].nodeName === 'H1') {
+            console.log(el.children[i].firstChild.id)
+            obj.label = el.children[i].firstChild.innerHTML
+            obj.id = el.children[i].firstChild.id
+            this.listData.push(obj)
+          }
+          if (el.children[i].nodeName === 'H2') {
+            obj.sub_label = el.children[i].firstChild.innerHTML
+            obj.id = el.children[i].firstChild.id
+            this.listData.push(obj)
+          }
+        }
+      })
+    })
   },
   computed: {
     ...mapState({
@@ -55,78 +78,78 @@ export default {
     })
   },
   watch: {
-    article(val,oldVal) {
-      if(val !== oldVal) {
+    article (val, oldVal) {
+      if (val !== oldVal) {
         this.showVisble = true
       }
     }
   },
   methods: {
-    getData() {
+    getData () {
       getArticleDetail({id: this.articleId}).then(res => {
         this.article = res.data
       })
-      getComment({ pageSize: 1,limit: 5,articleId: this.articleId}).then(res => {
-        this.commentData = res.data.list;
-      })
+      // getComment({ pageSize: 1, limit: 5, articleId: this.articleId}).then(res => {
+      //   this.commentData = res.data.list
+      // })
     },
-   handleComment(data) {
+    handleComment (data) {
       const params = {
         articleId: this.articleId,
         name: this.user.name,
         content: data.content
-      };
+      }
       addComment(params).then(res => {
-        if (res.code == 200) {
+        if (res.code === 200) {
           this.getData()
         }
-      });
-   },
-   handleReply(data) {
-     const params = {
+      })
+    },
+    handleReply (data) {
+      const params = {
         fromName: this.user.name,
         toUid: data.replyId,
         articleId: this.articleId,
         content: data.content
-      };
+      }
       replyComment(params).then(res => {
-        if(res.code == 200) {
+        if (res.code === 200) {
           this.getData()
         }
-      });
-   },
-    handleDel(id) {
-      deleteComment({ commentId: id }).then(res => {
-        if(res.code == 200) {
-          this.getData()
-        }
-      });
+      })
     },
-    handleDelReply(id) {
-      deleteReply({ replyId: id }).then(res => {
-        if(res.code == 200) {
+    handleDel (id) {
+      deleteComment({ commentId: id }).then(res => {
+        if (res.code === 200) {
           this.getData()
         }
-      });
+      })
+    },
+    handleDelReply (id) {
+      deleteReply({ replyId: id }).then(res => {
+        if (res.code === 200) {
+          this.getData()
+        }
+      })
     }
   },
   components: {
     SliderDetail,
     Comment
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
 .detail {
-  // max-width: 100%;
-  max-width: 800PX;
+  max-width: 100%;
+  // max-width: 800PX;
   margin: 0 auto;
   box-sizing: border-box;
   padding: 0 15px;
-  // display: flex;
+  display: flex;
   .detail-container {
-    // flex: 1;
+    flex: 1;
     padding: 28px;
     box-sizing: border-box;
     text-align: center;
@@ -136,17 +159,21 @@ export default {
       font-weight: 400;
       color: #111;
     }
-    .content {
+    .detail-content {
       margin: 0;
-      font-size: 12PX;
+      font-size: 13PX;
       text-align: justify;
       line-height: 1.6em;
+      >>> p {
+        line-height: 1.5em;
+      }
       >>> h1 {
-        font-size: 14PX;
+        font-size: 18PX;
         font-weight: bold;
+        // color: #;
       }
       >>> h2 {
-        font-size: 14PX;
+        font-size: 16PX;
         font-weight: bold;
       }
       >>> h3 {
@@ -203,13 +230,13 @@ export default {
       margin-top: 40px;
     }
   }
-  // .slider {
-  //   flex: 0 0 25%;
-  //   margin-top: 80px;
-  //   // margin-right: 40px;
-  //   padding: 0 40px;
-  //   box-sizing: border-box;
-  // }
+  .slider {
+    flex: 0 0 25%;
+    margin-top: 80px;
+    // margin-right: 40px;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
 }
 @media screen and (max-width: 800px) {
   .detail {
