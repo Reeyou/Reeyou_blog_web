@@ -22,21 +22,21 @@ import Nav from '../components/Nav'
 import Spin from '@/components/Loading'
 import Footer from '../components/Footer'
 export default {
-  computed: {
-    loading () {
-      return this.$store.state.loading
+    computed: {
+        loading () {
+            return this.$store.state.loading
+        }
+    },
+    created () {
+        console.log(this.loading)
+    },
+    components: {
+        'nav-bar': NavBar,
+        Mine,
+        Nav,
+        Spin,
+        Footer
     }
-  },
-  created () {
-    console.log(this.loading)
-  },
-  components: {
-    'nav-bar': NavBar,
-    Mine,
-    Nav,
-    Spin,
-    Footer
-  }
 }
 </script>
 

@@ -20,134 +20,136 @@
       </section>
     </div>
     <div class="slider">
-      <SliderDetail :data="listData" v-if='showVisble' />
+      <m-catalog :data="listData" v-if='showVisble' />
+    </div>
+    <div class="toolBar">
+      <m-toolBar />
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import SliderDetail from '../../../components/slider/sliderDetail'
+import Catalog from '../../../components/slider/catalog'
+import ToolBar from '../../../components/slider/toolBar'
 import Comment from '../../../components/comment'
 import {
-  getArticleDetail,
-  addComment,
-  // getComment,
-  deleteComment,
-  replyComment,
-  deleteReply
+    getArticleDetail,
+    addComment,
+    // getComment,
+    deleteComment,
+    replyComment,
+    deleteReply
 } from '@/service/article'
 export default {
-  data () {
-    return {
-      article: {},
-      articleId: this.$route.params.id,
-      commentData: [],
-      showVisble: false,
-      listData: []
+    data () {
+        return {
+            article: {},
+            articleId: this.$route.params.id,
+            commentData: [],
+            showVisble: false,
+            listData: []
+        }
+    },
+    created () {
+        this.getData()
+    },
+    mounted () {
+        this.$nextTick(() => {
+            window.addEventListener('load', () => {
+                const el = document.querySelector('.detail-content')
+                for (let i = 0; i < el.children.length; i++) {
+                    let obj = {}
+                    if (el.children[i].nodeName === 'H1') {
+                        obj.label = el.children[i].innerHTML.split('/a>')[1]
+                        obj.id = el.children[i].firstChild.id
+                        this.listData.push(obj)
+                    }
+                    if (el.children[i].nodeName === 'H2') {
+                        obj.sub_label = el.children[i].innerHTML.split('/a>')[1]
+                        obj.id = el.children[i].firstChild.id
+                        this.listData.push(obj)
+                    }
+                }
+            })
+        })
+    },
+    computed: {
+        ...mapState({
+            user: state => state.user
+        })
+    },
+    watch: {
+        article (val, oldVal) {
+            if (val !== oldVal) {
+                this.showVisble = true
+            }
+        }
+    },
+    methods: {
+        getData () {
+            getArticleDetail({id: this.articleId}).then(res => {
+                this.article = res.data
+            })
+            // getComment({ pageSize: 1, limit: 5, articleId: this.articleId}).then(res => {
+            //   this.commentData = res.data.list
+            // })
+        },
+        handleComment (data) {
+            const params = {
+                articleId: this.articleId,
+                name: this.user.name,
+                content: data.content
+            }
+            addComment(params).then(res => {
+                if (res.code === 200) {
+                    this.getData()
+                }
+            })
+        },
+        handleReply (data) {
+            const params = {
+                fromName: this.user.name,
+                toUid: data.replyId,
+                articleId: this.articleId,
+                content: data.content
+            }
+            replyComment(params).then(res => {
+                if (res.code === 200) {
+                    this.getData()
+                }
+            })
+        },
+        handleDel (id) {
+            deleteComment({ commentId: id }).then(res => {
+                if (res.code === 200) {
+                    this.getData()
+                }
+            })
+        },
+        handleDelReply (id) {
+            deleteReply({ replyId: id }).then(res => {
+                if (res.code === 200) {
+                    this.getData()
+                }
+            })
+        }
+    },
+    components: {
+        'm-catalog': Catalog,
+        'm-toolBar': ToolBar,
+        Comment
     }
-  },
-  created () {
-    this.getData()
-  },
-  mounted () {
-    this.$nextTick(() => {
-      window.addEventListener('load', () => {
-        const el = document.querySelector('.detail-content')
-
-        for (let i = 0; i < el.children.length; i++) {
-          let obj = {}
-          if (el.children[i].nodeName === 'H1') {
-            console.log(el.children[i].firstChild.id)
-            obj.label = el.children[i].firstChild.innerHTML
-            obj.id = el.children[i].firstChild.id
-            this.listData.push(obj)
-          }
-          if (el.children[i].nodeName === 'H2') {
-            obj.sub_label = el.children[i].firstChild.innerHTML
-            obj.id = el.children[i].firstChild.id
-            this.listData.push(obj)
-          }
-        }
-      })
-    })
-  },
-  computed: {
-    ...mapState({
-      user: state => state.user
-    })
-  },
-  watch: {
-    article (val, oldVal) {
-      if (val !== oldVal) {
-        this.showVisble = true
-      }
-    }
-  },
-  methods: {
-    getData () {
-      getArticleDetail({id: this.articleId}).then(res => {
-        this.article = res.data
-      })
-      // getComment({ pageSize: 1, limit: 5, articleId: this.articleId}).then(res => {
-      //   this.commentData = res.data.list
-      // })
-    },
-    handleComment (data) {
-      const params = {
-        articleId: this.articleId,
-        name: this.user.name,
-        content: data.content
-      }
-      addComment(params).then(res => {
-        if (res.code === 200) {
-          this.getData()
-        }
-      })
-    },
-    handleReply (data) {
-      const params = {
-        fromName: this.user.name,
-        toUid: data.replyId,
-        articleId: this.articleId,
-        content: data.content
-      }
-      replyComment(params).then(res => {
-        if (res.code === 200) {
-          this.getData()
-        }
-      })
-    },
-    handleDel (id) {
-      deleteComment({ commentId: id }).then(res => {
-        if (res.code === 200) {
-          this.getData()
-        }
-      })
-    },
-    handleDelReply (id) {
-      deleteReply({ replyId: id }).then(res => {
-        if (res.code === 200) {
-          this.getData()
-        }
-      })
-    }
-  },
-  components: {
-    SliderDetail,
-    Comment
-  }
 }
 </script>
 
 <style lang="scss" scoped>
 .detail {
   max-width: 100%;
-  // max-width: 800PX;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 0 15px;
   display: flex;
+  position: relative;
   .detail-container {
     flex: 1;
     padding: 28px;
@@ -155,7 +157,7 @@ export default {
     text-align: center;
     .title {
       margin: 10px 0 20px 0;
-      font-size: 16PX;
+      font-size: 20PX;
       font-weight: 400;
       color: #111;
     }
@@ -170,7 +172,7 @@ export default {
       >>> h1 {
         font-size: 18PX;
         font-weight: bold;
-        // color: #;
+        padding-top: 20PX;
       }
       >>> h2 {
         font-size: 16PX;
@@ -207,12 +209,8 @@ export default {
         color: #333;
         word-break: break-all;
         word-wrap: break-word;
-        background-color: #f5f5f5;
-        border: 1px solid #ccc;
         border-radius: 5px;
         line-height: 1.4em;
-        letter-spacing: 0.5PX;
-        overflow: auto;
       }
     }
     .foot {
@@ -236,6 +234,11 @@ export default {
     // margin-right: 40px;
     padding: 0 40px;
     box-sizing: border-box;
+  }
+  .toolBar {
+    position: absolute;
+    top: 344px;
+    left: -120px;
   }
 }
 @media screen and (max-width: 800px) {

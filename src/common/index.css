@@ -11,21 +11,23 @@ body {
   line-height: 1.5;
   background: url('./bg.jpg') repeat;
 }
+
 code {
-  /* font-size: 0.14rem;
-  margin: 0.5rem auto 0;
-  padding: 0; */
-  font-family: "iconfont" !important;
-  font-size: 14PX;
+  font-family: SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;
+  font-size: 12PX;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* max-width: 800px;
-  width: 100%;
-  height: auto;
-  position: relative; */
-  
+  -moz-osx-font-smoothing: grayscale;  /* box-shadow: 0 1PX 5PX 2PX rgba(0, 0, 0, 0.1); */
 }
-.h1js {
-  padding: .2em;
+.hljs {
+  padding: 0!important;
+  border-radius: 8PX;
+  box-shadow: 0 2PX 5PX 2PX rgba(0, 0, 0, 0.1);
+}
+.lang-javascript {
+  padding: 13PX 20PX!important;
+}
+.hljs-comment, .hljs-quote {
+  font-size: 12PX;
+  font-style: normal!important;
 }

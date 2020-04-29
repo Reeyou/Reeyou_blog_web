@@ -179,9 +179,9 @@ $dotColor: #e2e0dc;
 $circleColor: #444;
 .sliderDetail {
    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 10px 20px;
+   border: 1px solid $BrightColor;
+    border-radius: 8px;
+    padding: 26px 20px;
   h2 {
     font-size: 20px;
     font-weight: bold;
@@ -190,6 +190,7 @@ $circleColor: #444;
   }
   .list {
     position: relative;
+    margin-top: 10px;
     &::after {
       content: '';
       width: 2px;
@@ -203,8 +204,9 @@ $circleColor: #444;
     .item-list {
       font-size: 1.1em;
       font-weight: bold;
-      // padding: 3px 0;
-
+      +.item-list {
+        margin-top: 10px;
+      }
       > a {
         display: block;
         padding: 10px 26px;
@@ -216,7 +218,7 @@ $circleColor: #444;
           height: 12px;
           border-radius: 50%;
           position: absolute;
-          top: 12px;
+          top: 15px;
           left: 5px;
           border:1px solid $dotColor;
           background: #fff;
@@ -226,7 +228,6 @@ $circleColor: #444;
       .item {
         font-size: 0.8em;
         margin-top: 6px;
-        // padding-left: 30px;
         position: relative;
         > a {
           display: block;
@@ -250,6 +251,10 @@ $circleColor: #444;
      > a {
        color: $DeepColor;
        background: #eee;
+       &::after {
+        background: #fdf4e8;
+        border-color: #948c76;
+       }
      }
      &::after {
        border:1px solid $DeepColor;

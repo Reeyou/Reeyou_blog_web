@@ -35,35 +35,35 @@
 import spin from '@/components/Loading'
 import loadingPic from '@/assets/logo.png'
 export default {
-  props: ["article"],
-  data() {
-    return {
-      loading: true,
-      articleId: this.article._id,
-      poster_url: ''
-    };
-  },
-  watch: {},
-  created() {
-    console.log(this.article)
-  },
-  mounted() {
+    props: ['article'],
+    data () {
+        return {
+            loading: true,
+            articleId: this.article._id,
+            poster_url: ''
+        }
+    },
+    watch: {},
+    created () {
+        console.log(this.article)
+    },
+    mounted () {
     // 图片加载loading
-    var newImg = new Image()
-    newImg.src = this.article.poster
-    newImg.onerror = () => { // 图片加载错误时的替换图片
-      this.loading = false
-      newImg.src = ''
+        var newImg = new Image()
+        newImg.src = this.article.poster
+        newImg.onerror = () => { // 图片加载错误时的替换图片
+            this.loading = false
+            newImg.src = ''
+        }
+        newImg.onload = () => { // 图片加载成功后把地址给原来的img
+            this.loading = false
+            this.poster_url = newImg.src
+        }
+    },
+    components: {
+        spin
     }
-    newImg.onload = () => { // 图片加载成功后把地址给原来的img
-      this.loading = false
-      this.poster_url = newImg.src
-    }
-  },
-  components: {
-    spin
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped>

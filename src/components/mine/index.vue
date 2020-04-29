@@ -9,12 +9,12 @@
 
 <script>
 export default {
-  props: ['name'],
-  data () {
-    return {
+    props: ['name'],
+    data () {
+        return {
 
+        }
     }
-  }
 }
 </script>
 
@@ -37,7 +37,7 @@ export default {
         background: #fdf4e8;
         padding: 10px 20px;
         color: #948c76;
-        letter-spacing: 0.1em;
+        // letter-spacing: 0.1em;
         font-weight: 400;
         font-size: 1.3em;
         border-radius: 0.2em;

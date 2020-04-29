@@ -7,6 +7,7 @@ import router from './router'
 import './common/index.css'
 import './common/font.css'
 import '@/assets/iconfont/iconfont.css'
+import { util } from '@/utils/util'
 import 'lib-flexible'
 import moment from 'moment'
 // highlight.js代码高亮指令
@@ -15,14 +16,15 @@ import Highlight from './utils/highlight'
 Vue.prototype.$moment = moment
 
 Vue.use(Highlight)
+Vue.prototype.$util = util
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    store,
+    components: { App },
+    template: '<App/>'
 })

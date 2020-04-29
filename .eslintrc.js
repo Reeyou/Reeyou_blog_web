@@ -21,9 +21,30 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    // allow async-await
-    'generator-star-spacing': 'off',
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+      // allow async-await
+      'generator-star-spacing': 'off',
+      // allow debugger during development
+      'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+      "global-require": 0,
+      "semi":["error","never"],
+      "implicit-arrow-linebreak": 0,
+      "linebreak-style": ["off","windows"],
+      "import/extensions": [
+          2,
+          {
+              "vue": "never",
+              "ts": "never",
+              "tsx": "never",
+              "js": "never",
+              "jsx": "never"
+          }
+      ],
+      "indent": [
+          2,
+          4,
+          {
+              "SwitchCase": 1
+          }
+      ],
   }
 }

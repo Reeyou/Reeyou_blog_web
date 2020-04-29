@@ -23,41 +23,41 @@ import Slider from '../../components/slider/sliderHome'
 import Comment from '../../components/comment'
 import { getArticleList, getTagList } from '@/service/article'
 export default {
-  data () {
-    return {
-      ArticleList: [],
-      tagList: [],
-      total: 0,
-      page: 1
-    }
-  },
-  created () {
-    this.getArticleData()
-    this.getTagData()
-  },
-  methods: {
-    getArticleData (pageSize = 1, limit = 5) {
-      getArticleList({ pageSize, limit }).then(res => {
-        this.ArticleList = res.data.list
-        this.total = Math.ceil(res.data.total / 5)
-      })
+    data () {
+        return {
+            ArticleList: [],
+            tagList: [],
+            total: 0,
+            page: 1
+        }
     },
-    getTagData () {
-      getTagList().then(res => {
-        this.tagList = res.data
-      })
+    created () {
+        this.getArticleData()
+        this.getTagData()
     },
-    handleChangePage (pageSize) {
-      this.page = pageSize
-      this.getArticleData(pageSize)
+    methods: {
+        getArticleData (pageSize = 1, limit = 5) {
+            getArticleList({ pageSize, limit }).then(res => {
+                this.ArticleList = res.data.list
+                this.total = Math.ceil(res.data.total / 5)
+            })
+        },
+        getTagData () {
+            getTagList().then(res => {
+                this.tagList = res.data
+            })
+        },
+        handleChangePage (pageSize) {
+            this.page = pageSize
+            this.getArticleData(pageSize)
+        }
+    },
+    components: {
+        Article,
+        Pagination,
+        Slider,
+        Comment
     }
-  },
-  components: {
-    Article,
-    Pagination,
-    Slider,
-    Comment
-  }
 }
 </script>
 
