@@ -1,17 +1,17 @@
 <template>
     <div :class="['m-toolBar',fixed?'fixed':'']">
-        <p class='bg'></p>
         <ul>
             <li><a href="" title="点赞"><i class='iconfont icon-comment'></i></a></li>
+            <li><a href="" title="点赞"><i class='iconfont icon-dianzan1'></i></a></li>
             <li><a href="" title="评论"><i class='iconfont icon-like1'></i></a></li>
+            <li><a href="" title="评论"><i class='iconfont icon-like'></i></a></li>
         </ul>
-        <p>分享</p>
+        <p>分享至</p>
         <ul>
             <li><a href="" title="QQ"><i class='iconfont icon-qq'></i></a></li>
             <li><a href="" title="微信"><i class='iconfont icon-weixin2'></i></a></li>
             <li><a href="" title="微博"><i class='iconfont icon-weibo'></i></a></li>
         </ul>
-        <p class='bg bg1'></p>
     </div>
 </template>
 
@@ -34,9 +34,12 @@ export default {
 <style lang="scss" scoped>
 .m-toolBar {
     text-align: center;
-    background: #fff;
-    // border: 1px solid #000;
+    // background: #fff;
+    padding: 14px 0;
+    border-radius: 10px;
+    // box-shadow: 0 0 8px 2px rgba(0,0,0,.1);
     > ul {
+        // display: none;
         li {
             i {
                 padding: 20px;
@@ -44,6 +47,7 @@ export default {
                 background: #fff;
                 font-size: 30px;
                 color: #aaa;
+                transition: all 400ms linear;
                 &:hover {
                     color: #000;
                 }
@@ -58,21 +62,6 @@ export default {
     }
     .share-box {
         // margin-top: 20PX;
-    }
-    .bg {
-        display: inline;
-        position: absolute;
-        top: -40px;
-        // left: -40px;
-        padding: 20px;
-        border: 1px solid rgba(45, 181, 93, .68);
-        border-radius: 70% 30% 30% 70% /60% 40% 60% 40%;
-        z-index: -1;
-    }
-    .bg1 {
-        top: 366px;
-        right: -14px;
-        transform: rotate(90deg);
     }
 }
 .fixed {

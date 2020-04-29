@@ -30,9 +30,9 @@
 
 <script>
 import { mapState } from 'vuex'
-import Catalog from '../../../components/slider/catalog'
-import ToolBar from '../../../components/slider/toolBar'
-import Comment from '../../../components/comment'
+import Catalog from '@/components/slider/catalog'
+import ToolBar from '@/components/slider/toolBar'
+import Comment from '@/components/comment'
 import {
     getArticleDetail,
     addComment,
@@ -173,10 +173,12 @@ export default {
         font-size: 18PX;
         font-weight: bold;
         padding-top: 20PX;
+        color: #333;
       }
       >>> h2 {
         font-size: 16PX;
         font-weight: bold;
+        color: #999;
       }
       >>> h3 {
         font-size: 14PX;

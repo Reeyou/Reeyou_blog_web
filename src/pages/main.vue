@@ -2,25 +2,16 @@
   <div>
     <nav-bar />
     <div class="layout">
-      <Mine />
-      <Nav style="margin-top: 20px" />
-    <div class="content">
-      <div v-if='loading' class="loading">
-        <Spin class='spin' />
-      </div>
       <router-view />
     </div>
     <Footer/>
-    </div>
   </div>
 </template>
 
 <script>
+import Index from './Index'
 import NavBar from '@/components/NavBar'
-import Mine from '../components/Mine'
-import Nav from '../components/Nav'
-import Spin from '@/components/Loading'
-import Footer from '../components/Footer'
+import Footer from '@/components/Footer'
 export default {
     computed: {
         loading () {
@@ -31,10 +22,8 @@ export default {
         console.log(this.loading)
     },
     components: {
+        Index,
         'nav-bar': NavBar,
-        Mine,
-        Nav,
-        Spin,
         Footer
     }
 }
@@ -48,8 +37,6 @@ export default {
   .content {
     width: 100%;
     .loading {
-      // position: absolute;
-      // left: 0;
       width: 100%;
       height: 500px;
       display: flex;
@@ -57,7 +44,6 @@ export default {
       align-items: center;
       z-index: 999;
       .spin {
-        // position: a;
         height: 100px;
       }
     }

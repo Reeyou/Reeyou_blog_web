@@ -45,7 +45,7 @@
             <h1 class="f-s-18 f-w-900 m-b-20">开源项目</h1>
             <div class="boxes default m-b-20">
               <div class="box bg-gray-lightest">
-                ● 
+                ●
                 <a href="https://github.com/Redspitee/blog" target="_blank"> 个人博客 - 使用 Vue + Koa2 构建的个人网站，个人简历、文章及留言，持续迭代</a>
               </div>
             </div>
@@ -102,9 +102,9 @@
 </template>
 
 <script>
-  export default {
-    
-  }
+export default {
+
+}
 </script>
 
 <style lang="scss" scoped>

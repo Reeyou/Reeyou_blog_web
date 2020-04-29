@@ -15,49 +15,49 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-  export default {
-    data() {
-      return {
-        tabList: [
-          {
-            label: '简历',
-            name: 'resume'
-          },
-          {
-            label: '点滴',
-            name: 'article'
-          },
-          {
-            label: '留言',
-            name: 'message'
-          },
-        ]
-      }
+export default {
+    data () {
+        return {
+            tabList: [
+                {
+                    label: '简历',
+                    name: 'resume'
+                },
+                {
+                    label: '点滴',
+                    name: 'article'
+                },
+                {
+                    label: '留言',
+                    name: 'message'
+                }
+            ]
+        }
     },
     computed: mapState({
-      setTabItem: state => state.selectTab
+        setTabItem: state => state.selectTab
     }),
-    created() {
-      // 获取浏览器前进后退 tab_name
-      this.$router.beforeResolve((to, from, next) => {
-        next()
-        if(to.name == 'detail') {
-          this.changeTab('article')
-        } else {
-          this.changeTab(to.name)
-        }
-      })
+    created () {
+        // 获取浏览器前进后退 tab_name
+        this.$router.beforeResolve((to, from, next) => {
+            next()
+            if (to.name == 'detail') {
+                this.changeTab('article')
+            } else {
+                this.changeTab(to.name)
+            }
+        })
     },
     methods: {
-      ...mapActions({
-        changeTab: 'changeTab'
-      }),
-      handleClick(tab_name) {
-        sessionStorage.setItem('selectTab', JSON.stringify(tab_name)),
-        this.changeTab(tab_name)
-      }
+        ...mapActions({
+            changeTab: 'changeTab'
+        }),
+        handleClick (tab_name) {
+            sessionStorage.setItem('selectTab', JSON.stringify(tab_name)),
+            this.changeTab(tab_name)
+        }
     }
-  }
+}
 </script>
 
 <style lang="scss" scoped>

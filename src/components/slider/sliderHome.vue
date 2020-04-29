@@ -41,31 +41,31 @@
 </template>
 
 <script>
-import cover1 from "../../assets/img/1.jpg";
-import cover2 from "../../assets/img/2.jpg";
-import cover3 from "../../assets/img/3.jpg";
+import cover1 from '../../assets/img/1.jpg'
+import cover2 from '../../assets/img/2.jpg'
+import cover3 from '../../assets/img/3.jpg'
 export default {
-  props: ['tagList'],
-  data() {
-    return {
-      newTagList: [],
-      cover1: { backgroundImage: "url(" + cover1 + ")" },
-      cover2: { backgroundImage: "url(" + cover2 + ")" },
-      cover3: { backgroundImage: "url(" + cover3 + ")" }
-    };
-  },
-  mounted() {
+    props: ['tagList'],
+    data () {
+        return {
+            newTagList: [],
+            cover1: { backgroundImage: 'url(' + cover1 + ')' },
+            cover2: { backgroundImage: 'url(' + cover2 + ')' },
+            cover3: { backgroundImage: 'url(' + cover3 + ')' }
+        }
+    },
+    mounted () {
     // console.log(this.newTagList)
-  },
-  watch: {
+    },
+    watch: {
     // tagList(val) {
     //   if(val) {
     //     this.newTagList = val
     //     console.log(val)
     //   }
     // }
-  }
-};
+    }
+}
 </script>
 
 <style lang="scss" scoped>

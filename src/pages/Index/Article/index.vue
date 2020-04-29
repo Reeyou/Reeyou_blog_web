@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import Article from '../../components/Article'
-import Pagination from '../../components/Pagination'
-import Slider from '../../components/slider/sliderHome'
-import Comment from '../../components/comment'
+import Article from '@/components/Article'
+import Pagination from '@/components/Pagination'
+import Slider from '@/components/slider/sliderHome'
+import Comment from '@/components/comment'
 import { getArticleList, getTagList } from '@/service/article'
 export default {
     data () {

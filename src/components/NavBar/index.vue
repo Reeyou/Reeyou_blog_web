@@ -2,11 +2,14 @@
   <div :class="['m-nav-container',scroll ? 'fixed':'',fade?'fade':'']">
     <nav>
       <ul class="nav-left">
-        <!-- <img src="../../assets/reeyou.jpg" alt /> -->
-        <li v-for="(item,index) in navLeftList" :key="index">{{item}}</li>
+         <li v-for="(item,index) in navLeftList" :key="index">
+            <router-link :to="{name: item.url}">{{item.label}}</router-link>
+         </li>
         <li class='light'>
-          <i class="iconfont icon-search"></i>
-          <span>发现</span>
+          <router-link :to="{name: 'discover'}">
+            <i class="iconfont icon-search"></i>
+            <span>发现</span>
+          </router-link>
         </li>
       </ul>
       <div class="nav-right">
@@ -26,7 +29,13 @@
 export default {
     data () {
         return {
-            navLeftList: ['Reeyou', '首页', '分类', '博客', '关于'],
+            navLeftList: [
+                {label: 'Reeyou', url: '/'},
+                {label: '首页', url: '/'},
+                {label: '分类', url: 'category'},
+                {label: '博客', url: 'blog'},
+                {label: '关于', url: 'about'}
+            ],
             scroll: false,
             fade: false
         }
