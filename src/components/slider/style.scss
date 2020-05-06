@@ -140,7 +140,6 @@
     padding: 14px 20px;
     dl {
       dt {
-        font-size: 22px;
         margin-bottom: 10px;
       }
       dd {
@@ -157,19 +156,102 @@
   .tagList {
     padding: 14px 20px;
     dl {
+      // max-height: 300px;
+      // overflow: hidden;
       dt {
-        font-size: 1.3em;
         margin-bottom: 24px;
       }
       dd {
         display: inline-block;
-        padding: 10px 14px;
-        margin: 0 20px 20px 0;
-        font-size: 18px;
+        padding: 8px 20px;
+        margin: 0 34px 20px 0;
+        font-size: 12px;
         background: $BrightColor;
-        border-radius: 6px;
+        border-radius: 1020px;
+        position: relative;
+        transition: opacity 400ms ease;
+        &:nth-last-child(1) {
+          opacity: 0.1;
+        }
+        &:nth-last-child(2) {
+          opacity: 0.2;
+        }
+        &:nth-last-child(3) {
+          opacity: 0.3;
+        }
+        &:nth-last-child(4) {
+          opacity: 0.4;
+        }
+        &:nth-last-child(5) {
+          opacity: 0.5;
+        }
+        &:nth-last-child(6) {
+          opacity: 0.6;
+        }
+        &:nth-last-child(7) {
+          opacity: 0.7;
+        }
+        &:nth-last-child(8) {
+          opacity: 0.8;
+        }
+        &:nth-last-child(9) {
+          opacity: 0.9;
+        }
+        .badge {
+          position: absolute;
+          top: -8px;
+          right: -10PX;
+          min-width: 10px;
+          color: #fff;
+          background: #17807d;
+          font-size: 8px;
+          margin-left: 2px;
+          padding: 1PX 3PX;
+          text-align: center;
+          border-radius: 1020px;
+        }
+      }
+      &:hover dd{
+        opacity: 1;
       }
     }
+    .more {
+      dd {
+        opacity: 1!important ;
+      }
+    }
+    .show-more {
+      text-align: center;
+      .line {
+        border-top: 1px solid #eee;
+        margin: 0;
+      }
+      .more-btn {
+        display: inline-block;
+        margin-top: -24PX;
+        color: #5a5a5a;
+        border: 1px solid #ecf0f1;
+        border-radius: 1020px;
+        text-align: center;
+        padding: 4PX 10PX;
+        vertical-align: middle;
+        background: #fff;
+        cursor: pointer;
+        i {
+          margin-left: 2PX;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .text-300 {
+    font-weight: 300;
+  }
+  .text-500 {
+    font-weight: 500;
+  }
+  .text-lg {
+    font-size: 20PX;
   }
 }
 $DeepColor: #948C76;

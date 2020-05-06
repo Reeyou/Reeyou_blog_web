@@ -2,15 +2,12 @@
   <div :class="['m-nav-container',scroll ? 'fixed':'',fade?'fade':'']">
     <nav>
       <ul class="nav-left">
-         <li v-for="(item,index) in navLeftList" :key="index">
-            <router-link :to="{name: item.url}">{{item.label}}</router-link>
+         <li :class="item.active?'active':''" v-for="(item,index) in navLeftList" :key="index">
+            <router-link :to="{name: item.url}">
+              <i :class="item.icon"></i>
+              <span>{{item.label}}</span>
+            </router-link>
          </li>
-        <li class='light'>
-          <router-link :to="{name: 'discover'}">
-            <i class="iconfont icon-search"></i>
-            <span>发现</span>
-          </router-link>
-        </li>
       </ul>
       <div class="nav-right">
         <span class='app'>
@@ -30,11 +27,12 @@ export default {
     data () {
         return {
             navLeftList: [
-                {label: 'Reeyou', url: '/'},
-                {label: '首页', url: '/'},
-                {label: '分类', url: 'category'},
-                {label: '博客', url: 'blog'},
-                {label: '关于', url: 'about'}
+                {label: 'Reeyou', icon: '', url: '/', active: false},
+                {label: '首页', icon: '', url: '/', active: false},
+                {label: '分类', icon: '', url: 'category', active: false},
+                {label: '关于', icon: '', url: 'about', active: false},
+                {label: '开源项目', icon: '', url: 'blog', active: false},
+                {label: '发现', icon: 'iconfont icon-search', url: 'discover', active: true}
             ],
             scroll: false,
             fade: false
@@ -56,7 +54,7 @@ $color: #aca082;
   width: 100%;
   height: 44PX;
   line-height: 44PX;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
   nav {
     max-width: 1200PX;
     margin: 0 auto;
@@ -98,7 +96,7 @@ $color: #aca082;
 
         }
       }
-      .light {
+      .active {
         // color: rgb(224, 120, 40);
         color: #948c76;
       }
@@ -130,6 +128,8 @@ $color: #aca082;
   top: 0;
   z-index: 999;
   background: #fff;
+  border: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   animation: fadeIn 400ms 0s linear;
 }
 // .fade {

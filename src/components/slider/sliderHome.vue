@@ -23,7 +23,10 @@
     </section>
     <section class="recommend shadow">
       <dl>
-        <dt>推荐文章</dt>
+        <dt class='text-300 text-lg'>
+          <i class='iconfont icon-comment text-500 text-lg'></i>
+          推荐文章
+        </dt>
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>
         <dd><a href="">移动web性能优化从入门到进阶</a></dd>
@@ -33,9 +36,23 @@
     </section>
     <section class="tagList shadow">
       <dl>
-        <dt>文章标签</dt>
-        <dd v-for='(item,index) in tagList' :key='index'><a href="">{{item.tagname}}</a></dd>
+        <dt class='text-300 text-lg'>
+          <i class='iconfont icon-comment text-500 text-lg'></i>
+          标签分类
+        </dt>
+        <div :class="!showMore?'more':''  ">
+          <dd v-for='(item,index) in newTagList' :key='index'>
+            <a href="">{{item.tagname}}</a>
+            <span class='badge'>18</span>
+          </dd>
+        </div>
       </dl>
+      <div class='show-more'>
+        <hr class='line'>
+        <div class="more-btn" @click="toggle()">
+          <span class='btn-text'>{{showText}}<i :class='icon'></i></span>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -48,22 +65,26 @@ export default {
     props: ['tagList'],
     data () {
         return {
-            newTagList: [],
+            showMore: true,
+            showText: '显示更多',
+            icon: 'iconfont icon-arrow_d',
             cover1: { backgroundImage: 'url(' + cover1 + ')' },
             cover2: { backgroundImage: 'url(' + cover2 + ')' },
             cover3: { backgroundImage: 'url(' + cover3 + ')' }
         }
     },
-    mounted () {
-    // console.log(this.newTagList)
+    computed: {
+        newTagList () {
+            const data = this.showMore ? this.tagList.slice(0, 15) : this.tagList
+            return data
+        }
     },
-    watch: {
-    // tagList(val) {
-    //   if(val) {
-    //     this.newTagList = val
-    //     console.log(val)
-    //   }
-    // }
+    methods: {
+        toggle () {
+            this.showMore = !this.showMore
+            this.showText = !this.showMore ? '隐藏更多' : '显示更多'
+            this.icon = !this.showMore ? 'iconfont icon-arrow_u' : 'iconfont icon-arrow_d'
+        }
     }
 }
 </script>

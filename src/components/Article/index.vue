@@ -180,7 +180,7 @@ $titleColor: #444;
           border-radius: 8px;
           background: $BrightColor;
           // text-decoration: underline;
-          font-size: 14PX;
+          font-size: 12PX;
           &:hover {
             cursor: pointer;
             text-decoration: underline;
